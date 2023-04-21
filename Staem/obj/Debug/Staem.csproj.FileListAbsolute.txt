@@ -23,3 +23,29 @@ C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.csproj.CoreC
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.csproj.CopyComplete
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.exe
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.pdb
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\Staem.exe.config
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\Staem.exe
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\Staem.pdb
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\MySqlConnector.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Buffers.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Memory.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\MySqlConnector.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Buffers.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Memory.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.AssemblyReference.cache
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.SuggestedBindingRedirects.cache
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Form1.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Properties.Resources.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.GenerateResource.cache
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.CoreCompileInputs.cache
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.CopyComplete
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.exe
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.pdb
