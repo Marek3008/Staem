@@ -136,7 +136,7 @@ namespace Staem
                         label6.Text = "prihlaseny";
 
                         //ak su udaje spravne tak si prihlaseny a otvori sa hlavne okno
-                        MainForm mainform = new MainForm();
+                        MainForm mainform = new MainForm(user);
                         mainform.Show();
                         
                         //pouziva sa nizsie

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Staem
 {
-    class User
+    public class User
     {
         public string Email
         {
