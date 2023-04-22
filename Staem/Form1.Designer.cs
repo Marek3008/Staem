@@ -53,6 +53,7 @@ namespace Staem
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(73)))), ((int)(((byte)(121)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(55, 356);
@@ -67,36 +68,44 @@ namespace Staem
             // 
             this.userbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
             this.userbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.userbox.Location = new System.Drawing.Point(101, 197);
+            this.userbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.userbox.ForeColor = System.Drawing.Color.White;
+            this.userbox.Location = new System.Drawing.Point(110, 189);
             this.userbox.Name = "userbox";
-            this.userbox.Size = new System.Drawing.Size(153, 13);
+            this.userbox.Size = new System.Drawing.Size(153, 18);
             this.userbox.TabIndex = 1;
             // 
             // emailbox
             // 
             this.emailbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
             this.emailbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.emailbox.Location = new System.Drawing.Point(106, 230);
+            this.emailbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.emailbox.ForeColor = System.Drawing.Color.White;
+            this.emailbox.Location = new System.Drawing.Point(126, 232);
             this.emailbox.Name = "emailbox";
-            this.emailbox.Size = new System.Drawing.Size(159, 13);
+            this.emailbox.Size = new System.Drawing.Size(142, 18);
             this.emailbox.TabIndex = 2;
             // 
             // passbox
             // 
             this.passbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
             this.passbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.passbox.Location = new System.Drawing.Point(106, 262);
+            this.passbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.passbox.ForeColor = System.Drawing.Color.White;
+            this.passbox.Location = new System.Drawing.Point(123, 271);
             this.passbox.Name = "passbox";
-            this.passbox.Size = new System.Drawing.Size(154, 13);
+            this.passbox.Size = new System.Drawing.Size(142, 18);
             this.passbox.TabIndex = 2;
             // 
             // repeatpassbox
             // 
             this.repeatpassbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
             this.repeatpassbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.repeatpassbox.Location = new System.Drawing.Point(156, 297);
+            this.repeatpassbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.repeatpassbox.ForeColor = System.Drawing.Color.White;
+            this.repeatpassbox.Location = new System.Drawing.Point(136, 327);
             this.repeatpassbox.Name = "repeatpassbox";
-            this.repeatpassbox.Size = new System.Drawing.Size(109, 13);
+            this.repeatpassbox.Size = new System.Drawing.Size(128, 18);
             this.repeatpassbox.TabIndex = 2;
             // 
             // pictureBox1
@@ -125,7 +134,7 @@ namespace Staem
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(65, 213);
+            this.panel1.Location = new System.Drawing.Point(66, 213);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 1);
             this.panel1.TabIndex = 5;
@@ -133,7 +142,7 @@ namespace Staem
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(65, 248);
+            this.panel2.Location = new System.Drawing.Point(66, 255);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 1);
             this.panel2.TabIndex = 5;
@@ -141,7 +150,7 @@ namespace Staem
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Location = new System.Drawing.Point(65, 281);
+            this.panel3.Location = new System.Drawing.Point(65, 293);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 1);
             this.panel3.TabIndex = 5;
@@ -149,7 +158,7 @@ namespace Staem
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Location = new System.Drawing.Point(65, 316);
+            this.panel4.Location = new System.Drawing.Point(67, 349);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 1);
             this.panel4.TabIndex = 5;
@@ -157,53 +166,53 @@ namespace Staem
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(62, 196);
+            this.label2.Location = new System.Drawing.Point(61, 191);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 14);
+            this.label2.Size = new System.Drawing.Size(49, 19);
             this.label2.TabIndex = 6;
             this.label2.Text = "Nick:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(62, 229);
+            this.label3.Location = new System.Drawing.Point(63, 233);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 14);
+            this.label3.Size = new System.Drawing.Size(62, 19);
             this.label3.TabIndex = 6;
             this.label3.Text = "E-mail:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(62, 262);
+            this.label4.Location = new System.Drawing.Point(62, 272);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 14);
+            this.label4.Size = new System.Drawing.Size(59, 19);
             this.label4.TabIndex = 6;
             this.label4.Text = "Heslo:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(62, 296);
+            this.label5.Location = new System.Drawing.Point(62, 309);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 14);
+            this.label5.Size = new System.Drawing.Size(70, 38);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Zopkauj heslo:";
+            this.label5.Text = "Zopakuj\nheslo:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.label6.Location = new System.Drawing.Point(69, 320);
+            this.label6.Location = new System.Drawing.Point(70, 336);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 22);
             this.label6.TabIndex = 7;
