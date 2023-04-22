@@ -30,6 +30,7 @@ namespace Staem
         //tu sa zapisu hodnoty ktore najdeme v databaze ak ich najdeme; pouziva sa na kontrolovanie duplikovanych pouzivatelov
         public string checkedEmail;
         public string checkedUserID;
+        public string checkedPassword;
 
         public User(string userID, string email, string pass)
         {
@@ -63,6 +64,20 @@ namespace Staem
             {
                 checkedEmail = reader["email"].ToString();
                 checkedUserID = reader["userID"].ToString();
+            }
+        }
+
+        public void loginUser()
+        {
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM Users WHERE email = '{this.Email}' AND userID = '{this.UserID}' AND pass = '{this.Password}'", Database.connection);
+            cmd.CommandType = CommandType.Text;
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                checkedEmail = reader["email"].ToString();
+                checkedUserID = reader["userID"].ToString();
+                checkedPassword = reader["pass"].ToString();
             }
         }
            

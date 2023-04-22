@@ -42,10 +42,11 @@ C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.R
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.AssemblyReference.cache
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.SuggestedBindingRedirects.cache
-C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Form1.resources
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Properties.Resources.resources
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.GenerateResource.cache
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.CoreCompileInputs.cache
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.csproj.CopyComplete
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.exe
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.pdb
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.LoginForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.MainForm.resources
