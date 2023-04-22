@@ -21,17 +21,38 @@ namespace Staem
 
         private void button1_Click(object sender, EventArgs e)
         {
-            db.dbConnect();
+            
+            if(string.IsNullOrEmpty(userbox.Text) || string.IsNullOrEmpty(emailbox.Text) || string.IsNullOrEmpty(passbox.Text) || string.IsNullOrEmpty(repeatpassbox.Text))
+            {
+                label6.Text = "Vyplň všetky políčka!";
+            }
+            else 
+            {
+                if (passbox.Text == repeatpassbox.Text)
+                {
+                    db.dbConnect();
 
-            user = new User();
+                    user = new User(userbox.Text, emailbox.Text, passbox.Text);
 
-            user.Email = textBox1.Text;
-            user.Password = textBox2.Text;
+                    user.addUser();
 
-            user.addUser();
-            user = null;
+                    user = null;
 
-            db.dbClose();
+                    db.dbClose();
+                }
+                else
+                {
+                    label6.Text = "Heslá sa nezhodujú!";
+                }
+
+            }
+
+            
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

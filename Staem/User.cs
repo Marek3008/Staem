@@ -5,24 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
 using System.Data.SqlClient;
+using System.Drawing.Text;
 
 namespace Staem
 {
     class User
     {
-        public string Email
+        private string Email
         {
             get; set;
         }
 
-        public string Password
+        private string Password
         {
             get; set;
+        }
+
+        private string UserID
+        {
+            get; set;
+        }
+
+        public User(string userID, string email, string pass)
+        {
+            this.UserID = userID;
+            this.Email = email; 
+            this.Password = pass;
         }
 
         public void addUser()
         {
-            MySqlCommand cmd = new MySqlCommand($"INSERT INTO Users(email, pass) VALUES('{this.Email}', '{this.Password}')", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"INSERT INTO Users(email, pass, userID) VALUES('{this.Email}', '{this.Password}', '{this.UserID}')", Database.connection);
             cmd.ExecuteReader();
         }
            
