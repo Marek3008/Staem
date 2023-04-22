@@ -30,15 +30,32 @@ namespace Staem
             {
                 if (passbox.Text == repeatpassbox.Text)
                 {
-                    db.dbConnect();
+                    Database.dbConnect();
 
                     user = new User(userbox.Text, emailbox.Text, passbox.Text);
 
-                    user.addUser();
+                    user.checkUser();
 
-                    user = null;
+                    Database.dbClose(); 
 
-                    db.dbClose();
+                    if (user.checkedEmail == user.Email || user.checkedUserID == user.UserID)
+                    {                       
+                        label6.Text = "tento účet už existuje!";
+
+                        user = null;
+                    }
+                    else
+                    {
+                        Database.dbConnect();
+
+                        user.addUser();
+
+                        user = null;
+
+                        Database.dbClose();
+                    }
+
+                    
                 }
                 else
                 {

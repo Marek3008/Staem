@@ -6,25 +6,28 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using System.Data.SqlClient;
 using System.Drawing.Text;
+using System.Data;
 
 namespace Staem
 {
     class User
     {
-        private string Email
+        public string Email
         {
             get; set;
         }
 
-        private string Password
+        public string Password
         {
             get; set;
         }
 
-        private string UserID
+        public string UserID
         {
             get; set;
         }
+        public string checkedEmail;
+        public string checkedUserID;
 
         public User(string userID, string email, string pass)
         {
@@ -36,7 +39,19 @@ namespace Staem
         public void addUser()
         {
             MySqlCommand cmd = new MySqlCommand($"INSERT INTO Users(email, pass, userID) VALUES('{this.Email}', '{this.Password}', '{this.UserID}')", Database.connection);
-            cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
+        }
+
+        public void checkUser()
+        {
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM Users WHERE email = '{this.Email}' OR userID = '{this.UserID}';", Database.connection);
+            cmd.CommandType = CommandType.Text;
+            MySqlDataReader reader = cmd.ExecuteReader(); 
+            while (reader.Read())
+            {
+                checkedEmail = reader["email"].ToString();
+                checkedUserID = reader["userID"].ToString();
+            }
         }
            
     }

@@ -11,11 +11,11 @@ namespace Staem
     {
         public static MySqlConnection connection = new MySqlConnection("Server=banas.vybrat.eu;User ID=c48admin;Password=T2QZm7az#gR;Database=c48steamV2;AllowUserVariables=True;");
 
-        public void dbConnect()
+        public static void dbConnect()
         {
             connection.Open();
         }
-        public void dbClose()
+        public static void dbClose()
         {
             connection.Close();
         }
