@@ -26,6 +26,7 @@ namespace Staem
             label8.Cursor = Cursors.Default;
         }
 
+        //tato metoda ma za ulohu registrovat a prihlasovat pouzivatelov
         private void button1_Click(object sender, EventArgs e)
         {
             //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,6 +38,7 @@ namespace Staem
                 //kontroluje ci su vsetky policka vyplnene
                 if (string.IsNullOrEmpty(userbox.Text) || string.IsNullOrEmpty(emailbox.Text) || string.IsNullOrEmpty(passbox.Text) || string.IsNullOrEmpty(repeatpassbox.Text))
                 {
+                    label6.ForeColor = Color.FromArgb(255, 65, 65);
                     label6.Text = "Vyplň všetky políčka!";
                 }
                 else
@@ -55,6 +57,7 @@ namespace Staem
                     //ak sa snazime o vytvorenie pouzivatela s userID alebo emailom ktore uz existuje
                     if (user.checkedEmail == user.Email || user.checkedUserID == user.UserID)
                     {
+                        label6.ForeColor = Color.FromArgb(255, 65, 65);
                         label6.Text = "tento účet už existuje!";
 
                         //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
@@ -76,6 +79,7 @@ namespace Staem
                             label6.ForeColor = Color.Green;
                             label6.Text = "Úspešne si sa zaregistroval!";
 
+                            //vymaze text v textboxoch
                             userbox.Text = "";
                             emailbox.Text = "";
                             passbox.Text = "";
@@ -85,6 +89,7 @@ namespace Staem
                         }
                         else
                         {
+                            label6.ForeColor = Color.FromArgb(255, 65, 65);
                             label6.Text = "Heslá sa nezhodujú!";
                         }
                     }
@@ -97,39 +102,54 @@ namespace Staem
             //prihlasovanie sa
             if (loginMode)
             {
+                //kontrola ci niesu prazdne policka
                 if (string.IsNullOrEmpty(userbox.Text) || string.IsNullOrEmpty(emailbox.Text) || string.IsNullOrEmpty(passbox.Text))
                 {
+                    label6.ForeColor = Color.FromArgb(255, 65, 65);
                     label6.Text = "Vyplň všetky políčka!";
                 }
                 else
                 {
+                    //vytvara sa pouzivatel
                     user = new User(userbox.Text, emailbox.Text, passbox.Text);
 
                     Database.dbConnect();
+
+                    //nie je dobry nazov pre metodu; zapise userID, email a heslo z databazy do checkovacich premennych v User.cs
                     user.loginUser();
+
                     Database.dbClose();
 
+                    //kontroluje ci udaje z databazy sa rovnaju udajom ktore pouzivatel zadal
                     if (user.checkedUserID == user.UserID && user.checkedEmail == user.Email && user.checkedPassword == user.Password)
                     {
+                        label6.ForeColor = Color.Green;
                         label6.Text = "prihlaseny";
 
+                        //ak su udaje spravne tak si prihlaseny a otvori sa hlavne okno
                         MainForm mainform = new MainForm();
                         mainform.Show();
                         
+                        //pouziva sa nizsie
                         prihlaseny = true;
                     }
                     else
                     {
+                        label6.ForeColor = Color.FromArgb(255, 65, 65);
                         label6.Text = "Nesprávne prihlasovacie údaje!";
                         user = null;
                     }
                 }
-            }
-
-            
+            }            
         }
-
-        
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+        //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
         //tieto dve metody robia to ze vypinaju a zapinaju tlacidla
@@ -152,6 +172,7 @@ namespace Staem
             label1.Text = "PRIHLÁSENIE SA";
             label1.Location = new Point(44, 132);
 
+            //meni titel okna
             this.Text = "Prihlásenie";
         }
 
@@ -174,13 +195,16 @@ namespace Staem
             label1.Text = "REGISTRÁCIA";
             label1.Location = new Point(58, 132);
 
+            //meni titel okna
             this.Text = "Registrácia";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //kontroluje ci sa pouzivatel prihlasil
             if (prihlaseny)
             {
+                //ak sa prihlasil tak schova login okno
                 this.Hide();
             }
         }
