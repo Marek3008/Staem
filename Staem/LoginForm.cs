@@ -197,6 +197,8 @@ namespace Staem
 
             //meni titel okna
             this.Text = "Prihlásenie";
+
+            label6.Text = "";
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -226,6 +228,8 @@ namespace Staem
 
             //meni titel okna
             this.Text = "Registrácia";
+
+            label6.Text = "";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
