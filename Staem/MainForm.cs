@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
+using System.Drawing.Text;
+using System.IO;
 
 namespace Staem
 {
@@ -19,14 +19,9 @@ namespace Staem
         public MainForm(User user)
         {
             InitializeComponent();
-            this.user = user;
-            labelLib.MouseHover += new EventHandler(labelPanel_hover);
-            labelLib.MouseLeave += new EventHandler(labelPanel_unhover);
-            labelStore.MouseHover += new EventHandler (labelPanel_hover);
-            labelStore.MouseLeave += new EventHandler (labelPanel_unhover);
-            labelNick.Text = user.checkedUserID;
-            labelNick.MouseHover += new EventHandler(labelPanel_hover);
-            labelNick.MouseLeave += new EventHandler(labelPanel_unhover);
+            this.user = user;            
+            
+            labelNick.Text = (user.checkedUserID).ToUpper();            
         }
 
         private void labelPanel_hover(object sender, EventArgs e)
@@ -38,9 +33,24 @@ namespace Staem
         private void labelPanel_unhover(object sender, EventArgs e)
         {
             Label hoveredLabel = (Label)sender;
-            hoveredLabel.ForeColor = Color.MidnightBlue;
+            hoveredLabel.ForeColor = Color.White;
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            
+            //toto meni font
+            PrivateFontCollection font = new PrivateFontCollection();
 
+            string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
+
+            font.AddFontFile(fontPath);
+
+            foreach (Control c in this.Controls)
+            {
+                c.Font = new Font(font.Families[0], 16, FontStyle.Regular);
+            }
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace Staem
         /// </summary>
         private void InitializeComponent()
         {
+            Font peknyFont = new Font("BrunoAceSC-Regular.ttf", 12, FontStyle.Regular);
+
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.userbox = new System.Windows.Forms.TextBox();

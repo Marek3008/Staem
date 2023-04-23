@@ -181,6 +181,11 @@ namespace Staem
             label1.Text = "PRIHLÁSENIE SA";
             label1.Location = new Point(44, 132);
 
+            passbox.Text = "";
+            userbox.Text = "";
+            repeatpassbox.Text = "";
+            emailbox.Text = "";
+
             //meni titel okna
             this.Text = "Prihlásenie";
         }
@@ -203,6 +208,11 @@ namespace Staem
 
             label1.Text = "REGISTRÁCIA";
             label1.Location = new Point(58, 132);
+
+            passbox.Text = "";
+            userbox.Text = "";
+            repeatpassbox.Text = "";
+            emailbox.Text = "";
 
             //meni titel okna
             this.Text = "Registrácia";

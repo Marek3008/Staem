@@ -1,4 +1,7 @@
-﻿namespace Staem
+﻿using System;
+using System.Drawing;
+
+namespace Staem
 {
     partial class MainForm
     {
@@ -28,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.labelLib = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStore = new System.Windows.Forms.Label();
@@ -38,22 +42,24 @@
             // 
             this.labelLib.AutoSize = true;
             this.labelLib.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.labelLib.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelLib.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.labelLib.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelLib.ForeColor = System.Drawing.Color.White;
             this.labelLib.Location = new System.Drawing.Point(12, 18);
             this.labelLib.Name = "labelLib";
-            this.labelLib.Size = new System.Drawing.Size(94, 25);
+            this.labelLib.Size = new System.Drawing.Size(105, 24);
             this.labelLib.TabIndex = 0;
-            this.labelLib.Text = "Knižnica";
+            this.labelLib.Text = "KNIŽNICA";
+            this.labelLib.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
+            this.labelLib.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.ForeColor = System.Drawing.Color.MidnightBlue;
             this.panel1.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.panel1.Location = new System.Drawing.Point(-19, 46);
+            this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(872, 1);
+            this.panel1.Size = new System.Drawing.Size(1920, 1);
             this.panel1.TabIndex = 1;
             // 
             // labelStore
@@ -61,36 +67,42 @@
             this.labelStore.AutoSize = true;
             this.labelStore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelStore.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.labelStore.Location = new System.Drawing.Point(112, 18);
+            this.labelStore.ForeColor = System.Drawing.Color.White;
+            this.labelStore.Location = new System.Drawing.Point(192, 17);
             this.labelStore.Name = "labelStore";
-            this.labelStore.Size = new System.Drawing.Size(87, 25);
+            this.labelStore.Size = new System.Drawing.Size(103, 25);
             this.labelStore.TabIndex = 2;
-            this.labelStore.Text = "Obchod";
+            this.labelStore.Text = "OBCHOD";
+            this.labelStore.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
+            this.labelStore.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
             // labelNick
             // 
             this.labelNick.AutoSize = true;
             this.labelNick.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelNick.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelNick.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.labelNick.ForeColor = System.Drawing.Color.White;
             this.labelNick.Location = new System.Drawing.Point(690, 18);
             this.labelNick.Name = "labelNick";
             this.labelNick.Size = new System.Drawing.Size(0, 25);
             this.labelNick.TabIndex = 3;
+            this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
+            this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.RoyalBlue;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelLib);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Staem";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
