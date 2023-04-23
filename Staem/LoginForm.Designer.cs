@@ -31,9 +31,8 @@ namespace Staem
         /// </summary>
         private void InitializeComponent()
         {
-            Font peknyFont = new Font("BrunoAceSC-Regular.ttf", 12, FontStyle.Regular);
-
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.button1 = new System.Windows.Forms.Button();
             this.userbox = new System.Windows.Forms.TextBox();
             this.emailbox = new System.Windows.Forms.TextBox();
@@ -53,6 +52,7 @@ namespace Staem
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,46 +72,46 @@ namespace Staem
             // 
             // userbox
             // 
-            this.userbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.userbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.userbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.userbox.ForeColor = System.Drawing.Color.White;
-            this.userbox.Location = new System.Drawing.Point(110, 189);
+            this.userbox.Location = new System.Drawing.Point(125, 190);
             this.userbox.Name = "userbox";
-            this.userbox.Size = new System.Drawing.Size(153, 18);
+            this.userbox.Size = new System.Drawing.Size(185, 18);
             this.userbox.TabIndex = 1;
             // 
             // emailbox
             // 
-            this.emailbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.emailbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.emailbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.emailbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.emailbox.ForeColor = System.Drawing.Color.White;
-            this.emailbox.Location = new System.Drawing.Point(126, 232);
+            this.emailbox.Location = new System.Drawing.Point(149, 232);
             this.emailbox.Name = "emailbox";
-            this.emailbox.Size = new System.Drawing.Size(142, 18);
+            this.emailbox.Size = new System.Drawing.Size(161, 18);
             this.emailbox.TabIndex = 2;
             // 
             // passbox
             // 
-            this.passbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.passbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.passbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.passbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.passbox.ForeColor = System.Drawing.Color.White;
-            this.passbox.Location = new System.Drawing.Point(123, 271);
+            this.passbox.Location = new System.Drawing.Point(140, 271);
             this.passbox.Name = "passbox";
-            this.passbox.Size = new System.Drawing.Size(142, 18);
+            this.passbox.Size = new System.Drawing.Size(170, 18);
             this.passbox.TabIndex = 2;
             // 
             // repeatpassbox
             // 
-            this.repeatpassbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.repeatpassbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.repeatpassbox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.repeatpassbox.Font = new System.Drawing.Font("Arial Narrow", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.repeatpassbox.ForeColor = System.Drawing.Color.White;
-            this.repeatpassbox.Location = new System.Drawing.Point(136, 327);
+            this.repeatpassbox.Location = new System.Drawing.Point(137, 327);
             this.repeatpassbox.Name = "repeatpassbox";
-            this.repeatpassbox.Size = new System.Drawing.Size(128, 18);
+            this.repeatpassbox.Size = new System.Drawing.Size(173, 18);
             this.repeatpassbox.TabIndex = 2;
             // 
             // pictureBox1
@@ -140,6 +140,7 @@ namespace Staem
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.ForeColor = System.Drawing.Color.Transparent;
             this.panel1.Location = new System.Drawing.Point(66, 213);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 1);
@@ -209,16 +210,16 @@ namespace Staem
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(62, 309);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 38);
+            this.label5.Size = new System.Drawing.Size(70, 19);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Zopakuj\nheslo:";
+            this.label5.Text = "Zopakuj";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(65)))), ((int)(((byte)(65)))));
-            this.label6.Location = new System.Drawing.Point(73, 366);
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(18, 366);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 22);
             this.label6.TabIndex = 7;
@@ -254,15 +255,27 @@ namespace Staem
             this.timer1.Enabled = true;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(62, 327);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(57, 19);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "heslo:";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(322, 510);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -278,9 +291,11 @@ namespace Staem
             this.Controls.Add(this.emailbox);
             this.Controls.Add(this.userbox);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrácia";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -308,6 +323,7 @@ namespace Staem
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

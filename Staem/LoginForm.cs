@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +24,7 @@ namespace Staem
             InitializeComponent();
 
             //"vypne" label8 a.k.a chcem sa registrovat
-            label8.ForeColor = Color.FromArgb(37, 66, 156);
+            label8.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             label8.Cursor = Cursors.Default;
         }
 
@@ -47,6 +49,7 @@ namespace Staem
                 //kontroluje ci su vsetky policka vyplnene
                 if (string.IsNullOrEmpty(userbox.Text) || string.IsNullOrEmpty(emailbox.Text) || string.IsNullOrEmpty(passbox.Text) || string.IsNullOrEmpty(repeatpassbox.Text))
                 {
+                    label6.Location = new Point(66, 366);
                     label6.ForeColor = Color.FromArgb(255, 65, 65);
                     label6.Text = "Vyplň všetky políčka!";
                 }
@@ -66,8 +69,9 @@ namespace Staem
                     //ak sa snazime o vytvorenie pouzivatela s userID alebo emailom ktore uz existuje
                     if (user.checkedEmail == user.Email || user.checkedUserID == user.UserID)
                     {
+                        label6.Location = new Point(60, 366);
                         label6.ForeColor = Color.FromArgb(255, 65, 65);
-                        label6.Text = "tento účet už existuje!";
+                        label6.Text = "Tento účet už existuje!";
 
                         //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
                         user = null;
@@ -85,6 +89,7 @@ namespace Staem
                             //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
                             user = null;
 
+                            label6.Location = new Point(34, 366);
                             label6.ForeColor = Color.Green;
                             label6.Text = "Úspešne si sa zaregistroval!";
 
@@ -98,6 +103,7 @@ namespace Staem
                         }
                         else
                         {
+                            label6.Location = new Point(71, 366);
                             label6.ForeColor = Color.FromArgb(255, 65, 65);
                             label6.Text = "Heslá sa nezhodujú!";
                         }
@@ -114,6 +120,7 @@ namespace Staem
                 //kontrola ci niesu prazdne policka
                 if (string.IsNullOrEmpty(userbox.Text) || string.IsNullOrEmpty(emailbox.Text) || string.IsNullOrEmpty(passbox.Text))
                 {
+                    label6.Location = new Point(66, 366);
                     label6.ForeColor = Color.FromArgb(255, 65, 65);
                     label6.Text = "Vyplň všetky políčka!";
                 }
@@ -144,6 +151,7 @@ namespace Staem
                     }
                     else
                     {
+                        label6.Location = new Point(18, 366);
                         label6.ForeColor = Color.FromArgb(255, 65, 65);
                         label6.Text = "Nesprávne prihlasovacie údaje!";
                         user = null;
@@ -165,14 +173,15 @@ namespace Staem
         private void label7_Click(object sender, EventArgs e)
         {              
             repeatpassbox.Enabled = false;
-            label5.ForeColor = Color.FromArgb(37, 66, 156);
-            panel4.BackColor = Color.FromArgb(37, 66, 156);
+            label5.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
+            label9.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
+            panel4.BackColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             button1.Text = "PRIHLÁSIŤ SA";
 
             label8.ForeColor = Color.White;
             label8.Cursor = Cursors.Hand;
 
-            label7.ForeColor = Color.FromArgb(37, 66, 165);
+            label7.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             label7.Cursor = Cursors.Default;
 
             //meni mod
@@ -194,10 +203,11 @@ namespace Staem
         {
             repeatpassbox.Enabled = true;
             label5.ForeColor = Color.White;
+            label9.ForeColor = Color.White;
             panel4.BackColor = Color.White;
             button1.Text = "REGISTROVAŤ";
 
-            label8.ForeColor = Color.FromArgb(37, 66, 156);
+            label8.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             label8.Cursor = Cursors.Default;
 
             label7.ForeColor = Color.White;
@@ -226,6 +236,26 @@ namespace Staem
                 //ak sa prihlasil tak schova login okno
                 this.Hide();
             }
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+            //menim fonty
+            PrivateFontCollection privateFontCollection = new PrivateFontCollection();
+            string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
+            privateFontCollection.AddFontFile(fontPath);
+
+            label2.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
+            label3.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
+            label4.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
+            label5.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
+            label9.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
+            userbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
+            emailbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
+            passbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
+            repeatpassbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
+            button1.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
         }
     }
 }

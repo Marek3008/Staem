@@ -44,7 +44,7 @@ namespace Staem
             this.labelLib.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelLib.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelLib.ForeColor = System.Drawing.Color.White;
-            this.labelLib.Location = new System.Drawing.Point(12, 18);
+            this.labelLib.Location = new System.Drawing.Point(25, 12);
             this.labelLib.Name = "labelLib";
             this.labelLib.Size = new System.Drawing.Size(105, 24);
             this.labelLib.TabIndex = 0;
@@ -59,7 +59,7 @@ namespace Staem
             this.panel1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.panel1.Location = new System.Drawing.Point(0, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1920, 1);
+            this.panel1.Size = new System.Drawing.Size(1920, 5);
             this.panel1.TabIndex = 1;
             // 
             // labelStore
@@ -68,7 +68,7 @@ namespace Staem
             this.labelStore.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelStore.ForeColor = System.Drawing.Color.White;
-            this.labelStore.Location = new System.Drawing.Point(192, 17);
+            this.labelStore.Location = new System.Drawing.Point(177, 12);
             this.labelStore.Name = "labelStore";
             this.labelStore.Size = new System.Drawing.Size(103, 25);
             this.labelStore.TabIndex = 2;
@@ -82,10 +82,11 @@ namespace Staem
             this.labelNick.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelNick.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNick.ForeColor = System.Drawing.Color.White;
-            this.labelNick.Location = new System.Drawing.Point(690, 18);
+            this.labelNick.Location = new System.Drawing.Point(1730, 12);
             this.labelNick.Name = "labelNick";
-            this.labelNick.Size = new System.Drawing.Size(0, 25);
+            this.labelNick.Size = new System.Drawing.Size(72, 25);
             this.labelNick.TabIndex = 3;
+            this.labelNick.Text = "Marek";
             this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
@@ -93,7 +94,7 @@ namespace Staem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(66)))), ((int)(((byte)(156)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
