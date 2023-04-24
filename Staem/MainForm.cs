@@ -20,6 +20,12 @@ namespace Staem
         List<Game> games = new List<Game>();
         private int amount;
 
+        //vytvaram kolekciu mojich vlastnych fontov
+        PrivateFontCollection font = new PrivateFontCollection();
+
+        //ziskava absolutnu cestu ku suboru
+        string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
+
 
         //v atributoch je potiahnuty user z loginformu
         public MainForm(User user)
@@ -57,12 +63,14 @@ namespace Staem
         {
             Label hoveredLabel = (Label)sender;
             hoveredLabel.ForeColor = Color.Aqua;
+            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Regular);
         }
 
         private void labelPanel_unhover(object sender, EventArgs e)
         {
             Label hoveredLabel = (Label)sender;
             hoveredLabel.ForeColor = Color.White;
+            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Regular);
         }
 
         public void getGame()
@@ -136,7 +144,6 @@ namespace Staem
 
                 //VELMI DOLEZITE!!!; toto robi to ze dane "ovladanie" (label, textbox, ...) mozeme naozaj aj vidiet; bez tohoto by objekt picbox zaberal iba miesto v pamati
                 this.Controls.Add(picbox);
-                this.Controls.Add(cena);
             }
         }
 
@@ -145,12 +152,6 @@ namespace Staem
         {
             //toto robi maximalizovane okno 
             this.WindowState = FormWindowState.Maximized;
-            
-            //vytvaram kolekciu mojich vlastnych fontov
-            PrivateFontCollection font = new PrivateFontCollection();
-
-            //ziskava absolutnu cestu ku suboru
-            string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
 
             //pridavam font do mojej kolekcie
             font.AddFontFile(fontPath);
