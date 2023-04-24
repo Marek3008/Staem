@@ -100,7 +100,8 @@ namespace Staem
 
         public void drawGames()
         {
-            int a = 0;
+            int x = 0, y = 0;
+            int counter = 0;
 
             //cyklus bude prebiehat tolko krat kolko je hier v liste; hram pridelujeme docasny univerzalny nazov item ktory existuje iba v cykle
             foreach (var item in games)
@@ -114,14 +115,28 @@ namespace Staem
                 PictureBox picbox = new PictureBox
                 {
                     Image = Image.FromFile(path),
-                    Location = new Point(52 + a, 85),
-                    Size = new Size(200, 200),
-                    SizeMode = PictureBoxSizeMode.StretchImage
+                    Location = new Point(310 + x, 85 + y),
+                    Size = new Size(400, 200),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Cursor = Cursors.Hand
                 };
-                a += 300;
+
+
+                picbox.Click += new System.EventHandler(picbox_Click);
+
+                x += 450;
+
+                counter++;
+
+                if((counter % 3) == 0)
+                {
+                    x = 0; 
+                    y += 278;
+                }
 
                 //VELMI DOLEZITE!!!; toto robi to ze dane "ovladanie" (label, textbox, ...) mozeme naozaj aj vidiet; bez tohoto by objekt picbox zaberal iba miesto v pamati
                 this.Controls.Add(picbox);
+                this.Controls.Add(cena);
             }
         }
 
@@ -152,7 +167,9 @@ namespace Staem
 
             
         }
-
+        private void picbox_Click(object sender, EventArgs e)
+        {
+        }
         
     }
 }
