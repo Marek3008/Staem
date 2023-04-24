@@ -36,9 +36,6 @@ namespace Staem
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStore = new System.Windows.Forms.Label();
             this.labelNick = new System.Windows.Forms.Label();
-            this.labelpokus = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelLib
@@ -93,31 +90,12 @@ namespace Staem
             this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
-            // labelpokus
-            // 
-            this.labelpokus.AutoSize = true;
-            this.labelpokus.Location = new System.Drawing.Point(672, 188);
-            this.labelpokus.Name = "labelpokus";
-            this.labelpokus.Size = new System.Drawing.Size(35, 13);
-            this.labelpokus.TabIndex = 5;
-            this.labelpokus.Text = "label1";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(52, 85);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.labelpokus);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);
@@ -126,7 +104,6 @@ namespace Staem
             this.Name = "MainForm";
             this.Text = "Staem";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,7 +115,5 @@ namespace Staem
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.Label labelNick;
-        private System.Windows.Forms.Label labelpokus;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

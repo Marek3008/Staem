@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 
 namespace Staem
 {
+    //tato klasa sluzi len na to aby som mohol vytvorit objekt s vlastnostami uvedenymi nizsie
     class Game
     {
         public string Name
