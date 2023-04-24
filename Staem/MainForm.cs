@@ -129,8 +129,29 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
+                Panel panelCena = new Panel
+                {
+                    Location = new Point(310 + x, 285 + y),
+                    Size = new Size(400, 35),
+                    BackColor = Color.FromArgb(57, 102, 132),
+                    Cursor = Cursors.Hand
+                };
+
+                Label cena = new Label
+                {
+                    Location = new Point(320 + x, 292 + y),
+                    AutoSize = true,
+                    Padding = new Padding(2),
+                    BackColor = Color.FromArgb(38, 62, 85),
+                    ForeColor = Color.White,
+                    Text = item.Price,
+                    Font = new Font(font.Families[0], 10, FontStyle.Regular), // moze byt aj FontStyle.Bold
+                    Cursor = Cursors.Hand
+                };
 
                 picbox.Click += new System.EventHandler(picbox_Click);
+                panelCena.Click += new System.EventHandler(picbox_Click);
+                cena.Click += new System.EventHandler(picbox_Click);
 
                 x += 450;
 
@@ -144,6 +165,9 @@ namespace Staem
 
                 //VELMI DOLEZITE!!!; toto robi to ze dane "ovladanie" (label, textbox, ...) mozeme naozaj aj vidiet; bez tohoto by objekt picbox zaberal iba miesto v pamati
                 this.Controls.Add(picbox);
+                panelCena.Controls.Add(cena);
+                this.Controls.Add(cena);
+                this.Controls.Add(panelCena);
             }
         }
 
@@ -170,6 +194,8 @@ namespace Staem
         }
         private void picbox_Click(object sender, EventArgs e)
         {
+            labelpokus.Text = "cau";
+
         }
         
     }
