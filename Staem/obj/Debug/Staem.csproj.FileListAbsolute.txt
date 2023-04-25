@@ -51,3 +51,4 @@ C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Lo
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.MainForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.LoginForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.MainForm.resources
+C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.csproj.SuggestedBindingRedirects.cache

@@ -19,6 +19,11 @@ namespace Staem
         bool loginMode = false;
         bool prihlaseny = false;
 
+        //menim fonty
+        PrivateFontCollection privateFontCollection = new PrivateFontCollection();
+        string bruno = Path.GetFullPath("BrunoAceSC.ttf");
+        string bauhaus = Path.GetFullPath("Bauhaus93.ttf");
+
         public LoginForm()
         {
             InitializeComponent();
@@ -26,6 +31,20 @@ namespace Staem
             //"vypne" label8 a.k.a chcem sa registrovat
             label8.ForeColor = Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             label8.Cursor = Cursors.Default;
+
+            privateFontCollection.AddFontFile(bauhaus);
+            privateFontCollection.AddFontFile(bruno);
+            label1.Font = new Font(privateFontCollection.Families[0], 26, FontStyle.Regular);
+            label2.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label3.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label4.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label5.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label9.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            userbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            emailbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            passbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            repeatpassbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            button1.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
         }
 
         //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -187,9 +206,11 @@ namespace Staem
             //meni mod
             loginMode = true;
 
-            label1.Text = "PRIHLÁSENIE SA";
-            label1.Location = new Point(44, 132);
+            label1.Text = "PRIHLÁSENIE";
+            label1.Location = new Point(63, 132);
 
+            label1.Font = new Font(privateFontCollection.Families[0], 26, FontStyle.Regular);
+            
             passbox.Text = "";
             userbox.Text = "";
             repeatpassbox.Text = "";
@@ -221,6 +242,9 @@ namespace Staem
             label1.Text = "REGISTRÁCIA";
             label1.Location = new Point(58, 132);
 
+            label1.Font = new Font(privateFontCollection.Families[0], 26, FontStyle.Regular);
+
+
             passbox.Text = "";
             userbox.Text = "";
             repeatpassbox.Text = "";
@@ -240,26 +264,20 @@ namespace Staem
                 //ak sa prihlasil tak schova login okno
                 this.Hide();
             }
+
+            /*
+            label2.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label3.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label4.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label5.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            label9.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            userbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            emailbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            passbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            repeatpassbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
+            button1.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
+            */
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
-            //menim fonty
-            PrivateFontCollection privateFontCollection = new PrivateFontCollection();
-            string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
-            privateFontCollection.AddFontFile(fontPath);
-
-            label2.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-            label3.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-            label4.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-            label5.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-            label9.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-            userbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
-            emailbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
-            passbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
-            repeatpassbox.Font = new Font(privateFontCollection.Families[0], 11, FontStyle.Regular);
-            button1.Font = new Font(privateFontCollection.Families[0], 12, FontStyle.Bold);
-        }
     }
 }

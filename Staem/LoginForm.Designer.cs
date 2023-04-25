@@ -129,11 +129,11 @@ namespace Staem
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Bauhaus 93", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.75F);
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(58, 132);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 39);
+            this.label1.Size = new System.Drawing.Size(259, 40);
             this.label1.TabIndex = 4;
             this.label1.Text = "REGISTRÁCIA";
             // 
@@ -295,7 +295,6 @@ namespace Staem
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrácia";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
