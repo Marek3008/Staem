@@ -63,14 +63,14 @@ namespace Staem
         {
             Label hoveredLabel = (Label)sender;
             hoveredLabel.ForeColor = Color.Aqua;
-            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Regular);
+            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Bold);
         }
 
         private void labelPanel_unhover(object sender, EventArgs e)
         {
             Label hoveredLabel = (Label)sender;
             hoveredLabel.ForeColor = Color.White;
-            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Regular);
+            hoveredLabel.Font = new Font(font.Families[0], 16, FontStyle.Bold);
         }
 
         public void getGame()
@@ -149,9 +149,13 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                picbox.Click += new System.EventHandler(picbox_Click);
-                panelCena.Click += new System.EventHandler(picbox_Click);
-                cena.Click += new System.EventHandler(picbox_Click);
+                //picbox.Click += new System.EventHandler(picbox_Click);
+                //panelCena.Click += new System.EventHandler(picbox_Click);
+                //cena.Click += new System.EventHandler(picbox_Click);
+
+                picbox.Click += (sender, e) => picbox_Click(item);
+                panelCena.Click += (sender, e) => picbox_Click(item);
+                cena.Click += (sender, e) => picbox_Click(item);
 
                 x += 450;
 
@@ -186,15 +190,59 @@ namespace Staem
                 c.Font = new Font(font.Families[0], 16, FontStyle.Regular);
             }
 
+            labelLib.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+            labelStore.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+            labelNick.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+
             getAmount();
             getGame();
             drawGames();
 
             
         }
-        private void picbox_Click(object sender, EventArgs e)
+        private void picbox_Click(Game game)
         {
-            labelpokus.Text = "cau";
+            foreach (Control c in this.Controls)
+            {
+                c.Visible = false;
+                labelLib.Visible = true;
+                labelNick.Visible = true;
+                labelStore.Visible = true;
+                panel1.Visible = true;
+                labelNazov.Visible = true;
+            }
+            
+            labelNazov.Text = game.Name;
+
+            Label popis = new Label
+            {
+                Location = new Point(300, 300),                
+                AutoSize = true,
+                MaximumSize = new Size(800, 0),
+                ForeColor = Color.White,
+                Text = game.Description,
+                Font = new Font(font.Families[0], 13, FontStyle.Regular)
+            };
+
+            Button kupit = new Button
+            {
+                Size = new Size(100, 40),
+                Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
+                Text = game.Price,
+                ForeColor = Color.White,
+                Cursor = Cursors.Hand,
+                Font = new Font(font.Families[0], 13, FontStyle.Regular),
+                BackColor = Color.Black,
+            };
+
+            kupit.Click += new EventHandler(kupit_Click);
+
+            Controls.Add(popis);
+            Controls.Add(kupit);
+        }
+
+        private void kupit_Click(object sender, EventArgs e)
+        {
 
         }
         
