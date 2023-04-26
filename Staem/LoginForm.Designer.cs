@@ -65,7 +65,7 @@ namespace Staem
             this.button1.Location = new System.Drawing.Point(52, 414);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(227, 61);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 5;
             this.button1.Text = "REGISTROVAŤ";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -101,7 +101,7 @@ namespace Staem
             this.passbox.Location = new System.Drawing.Point(140, 271);
             this.passbox.Name = "passbox";
             this.passbox.Size = new System.Drawing.Size(170, 18);
-            this.passbox.TabIndex = 2;
+            this.passbox.TabIndex = 3;
             // 
             // repeatpassbox
             // 
@@ -112,7 +112,7 @@ namespace Staem
             this.repeatpassbox.Location = new System.Drawing.Point(137, 327);
             this.repeatpassbox.Name = "repeatpassbox";
             this.repeatpassbox.Size = new System.Drawing.Size(173, 18);
-            this.repeatpassbox.TabIndex = 2;
+            this.repeatpassbox.TabIndex = 4;
             // 
             // pictureBox1
             // 

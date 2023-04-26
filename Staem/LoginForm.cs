@@ -7,6 +7,7 @@ using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -74,59 +75,63 @@ namespace Staem
                 }
                 else
                 {
-                    Database.dbConnect();
-
-                    //vytvara noveho pouzivatela
-                    user = new User(userbox.Text, emailbox.Text, passbox.Text);
-
-                    //skontroluje tabulku v databaze ci sa nesnazime vytvorit pouzivatela s rovnakym UserID alebo emailom
-                    //resp. sa zapisu hodnoty do premennych v User.cs ktore sa pouzivaju nizsie
-                    user.checkUser();
-
-                    Database.dbClose();
-
-                    //ak sa snazime o vytvorenie pouzivatela s userID alebo emailom ktore uz existuje
-                    if (user.checkedEmail == user.Email || user.checkedUserID == user.UserID)
+                    //ak je mail v spravnom formate tak pokracuje dalej
+                    if (mailValidate())
                     {
-                        label6.Location = new Point(60, 366);
-                        label6.ForeColor = Color.FromArgb(255, 65, 65);
-                        label6.Text = "Tento účet už existuje!";
+                        Database.dbConnect();
 
-                        //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
-                        user = null;
-                    }
-                    else
-                    {
-                        //kontroluje ci sa nam zhoduju hesla
-                        if (passbox.Text == repeatpassbox.Text)
+                        //vytvara noveho pouzivatela
+                        user = new User(userbox.Text, emailbox.Text, passbox.Text);
+
+                        //skontroluje tabulku v databaze ci sa nesnazime vytvorit pouzivatela s rovnakym UserID alebo emailom
+                        //resp. sa zapisu hodnoty do premennych v User.cs ktore sa pouzivaju nizsie
+                        user.checkUser();
+
+                        Database.dbClose();
+
+                        //ak sa snazime o vytvorenie pouzivatela s userID alebo emailom ktore uz existuje
+                        if (user.checkedEmail == user.Email || user.checkedUserID == user.UserID)
                         {
-                            Database.dbConnect();
-
-                            //prida pouzivatela do databazy
-                            user.addUser();
+                            label6.Location = new Point(60, 366);
+                            label6.ForeColor = Color.FromArgb(255, 65, 65);
+                            label6.Text = "Tento účet už existuje!";
 
                             //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
                             user = null;
-
-                            label6.Location = new Point(34, 366);
-                            label6.ForeColor = Color.Green;
-                            label6.Text = "Úspešne si sa zaregistroval!";
-
-                            //vymaze text v textboxoch
-                            userbox.Text = "";
-                            emailbox.Text = "";
-                            passbox.Text = "";
-                            repeatpassbox.Text = "";
-
-                            Database.dbClose();
                         }
                         else
                         {
-                            label6.Location = new Point(71, 366);
-                            label6.ForeColor = Color.FromArgb(255, 65, 65);
-                            label6.Text = "Heslá sa nezhodujú!";
+                            //kontroluje ci sa nam zhoduju hesla
+                            if (passbox.Text == repeatpassbox.Text)
+                            {
+                                Database.dbConnect();
+
+                                //prida pouzivatela do databazy
+                                user.addUser();
+
+                                //vymaze udaje o pouzivatelovi aby sa objekt mohol pouzit nanovo
+                                user = null;
+
+                                label6.Location = new Point(34, 366);
+                                label6.ForeColor = Color.Green;
+                                label6.Text = "Úspešne si sa zaregistroval!";
+
+                                //vymaze text v textboxoch
+                                userbox.Text = "";
+                                emailbox.Text = "";
+                                passbox.Text = "";
+                                repeatpassbox.Text = "";
+
+                                Database.dbClose();
+                            }
+                            else
+                            {
+                                label6.Location = new Point(71, 366);
+                                label6.ForeColor = Color.FromArgb(255, 65, 65);
+                                label6.Text = "Heslá sa nezhodujú!";
+                            }
                         }
-                    }
+                    }                    
                 }
                                 
             }
@@ -263,20 +268,26 @@ namespace Staem
             {
                 //ak sa prihlasil tak schova login okno
                 this.Hide();
-            }
+            }            
+        }
 
-            /*
-            label2.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            label3.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            label4.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            label5.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            label9.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            userbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
-            emailbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
-            passbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
-            repeatpassbox.Font = new Font(privateFontCollection.Families[1], 11, FontStyle.Regular);
-            button1.Font = new Font(privateFontCollection.Families[1], 12, FontStyle.Bold);
-            */
+
+        //kontroluje ci je spravny format mailu (neda sa to uplne osetrit)
+        private bool mailValidate()
+        {
+            //v hranatych zatvorkach je to co sa tam moze nachadzat
+            string pattern = @"^[a-z0-9\.]+@[a-z]+\.[a-z]+$";
+
+            if(Regex.IsMatch(emailbox.Text, pattern))
+            {
+                return true;
+            }
+            else
+            {
+                label6.Text = "zadaj spravny format";
+                return false;
+            }
+            
         }
 
     }
