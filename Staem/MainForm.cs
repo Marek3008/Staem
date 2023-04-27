@@ -61,6 +61,11 @@ namespace Staem
             drawGames();
         }
 
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
 
         //tato metoda zisti pocet hier v tabulke podla ID
         public void getAmount()
@@ -258,10 +263,6 @@ namespace Staem
             hlavnyPanel.Controls.Add(kupit);
 
         }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
+                
     }
 }
