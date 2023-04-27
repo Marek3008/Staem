@@ -246,8 +246,9 @@ namespace Staem
 
             Button kupit = new Button
             {
-                Size = new Size(100, 40),
-                Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
+                AutoSize = true,
+                //Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
+                Location = new Point(200, 200),
                 Text = game.Price,
                 ForeColor = Color.White,
                 Cursor = Cursors.Hand,
@@ -255,14 +256,15 @@ namespace Staem
                 BackColor = Color.Black,
             };
 
+            // nechytat sa toho, lebo takto to funguje
             Controls.Add(nazovHry);
-            Controls.Add(hlavnyPanel);
-            Controls.Add(popis);
-            Controls.Add(kupit);
+
             hlavnyPanel.Controls.Add(popis);
             hlavnyPanel.Controls.Add(kupit);
 
+            Controls.Add(kupit);
+            Controls.Add(hlavnyPanel);
         }
-                
+
     }
 }
