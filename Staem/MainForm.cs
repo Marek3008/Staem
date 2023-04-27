@@ -37,6 +37,31 @@ namespace Staem
         }
 
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            //toto robi maximalizovane okno 
+            this.WindowState = FormWindowState.Maximized;
+
+            //pridavam font do mojej kolekcie
+            font.AddFontFile(fontPath);
+
+            //k fontu pristupujem tak ze: nazovkolekcie.Families[poradie daneho fontu]
+            foreach (Control c in this.Controls)
+            {
+                c.Font = new Font(font.Families[0], 16, FontStyle.Regular);
+            }
+
+            labelLib.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+            labelStore.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+            labelNick.Font = new Font(font.Families[0], 16, FontStyle.Bold);
+
+
+            getAmount();
+            getGame();
+            drawGames();
+        }
+
+
         //tato metoda zisti pocet hier v tabulke podla ID
         public void getAmount()
         {
@@ -103,7 +128,6 @@ namespace Staem
 
                 Database.dbClose();
             }
-
         }
 
         public void drawGames()
@@ -149,10 +173,8 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                //picbox.Click += new System.EventHandler(picbox_Click);
-                //panelCena.Click += new System.EventHandler(picbox_Click);
-                //cena.Click += new System.EventHandler(picbox_Click);
-
+                
+                //vdaka tomuto divokemu zapisu mozem do onclick metody passnut argument
                 picbox.Click += (sender, e) => picbox_Click(item);
                 panelCena.Click += (sender, e) => picbox_Click(item);
                 cena.Click += (sender, e) => picbox_Click(item);
@@ -176,30 +198,7 @@ namespace Staem
         }
 
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            //toto robi maximalizovane okno 
-            this.WindowState = FormWindowState.Maximized;
-
-            //pridavam font do mojej kolekcie
-            font.AddFontFile(fontPath);
-
-            //k fontu pristupujem tak ze: nazovkolekcie.Families[poradie daneho fontu]
-            foreach (Control c in this.Controls)
-            {
-                c.Font = new Font(font.Families[0], 16, FontStyle.Regular);
-            }
-
-            labelLib.Font = new Font(font.Families[0], 16, FontStyle.Bold);
-            labelStore.Font = new Font(font.Families[0], 16, FontStyle.Bold);
-            labelNick.Font = new Font(font.Families[0], 16, FontStyle.Bold);
-
-            getAmount();
-            getGame();
-            drawGames();
-
-            
-        }
+        
         private void picbox_Click(Game game)
         {
             foreach (Control c in this.Controls)
@@ -209,14 +208,30 @@ namespace Staem
                 labelNick.Visible = true;
                 labelStore.Visible = true;
                 panel1.Visible = true;
-                labelNazov.Visible = true;
             }
-            
-            labelNazov.Text = game.Name;
+                        
+
+            Panel hlavnyPanel = new Panel
+            {
+                Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2), 150),
+                AutoSize = true,
+                MaximumSize = new Size(840, 0),
+                BackColor = Color.FromArgb(103, 103, 178),
+                Cursor = Cursors.Default
+            };
+
+            Label nazovHry = new Label
+            {
+                Location = new Point(100, 100),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = game.Name,
+                Font = new Font(font.Families[0], 20, FontStyle.Bold)
+            };
 
             Label popis = new Label
             {
-                Location = new Point(300, 300),                
+                Location = new Point(20, 20),                
                 AutoSize = true,
                 MaximumSize = new Size(800, 0),
                 ForeColor = Color.White,
@@ -235,16 +250,18 @@ namespace Staem
                 BackColor = Color.Black,
             };
 
-            kupit.Click += new EventHandler(kupit_Click);
-
+            Controls.Add(nazovHry);
+            Controls.Add(hlavnyPanel);
             Controls.Add(popis);
             Controls.Add(kupit);
+            hlavnyPanel.Controls.Add(popis);
+            hlavnyPanel.Controls.Add(kupit);
+
         }
 
-        private void kupit_Click(object sender, EventArgs e)
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Application.Exit();
         }
-        
     }
 }

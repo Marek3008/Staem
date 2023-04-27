@@ -36,7 +36,6 @@ namespace Staem
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStore = new System.Windows.Forms.Label();
             this.labelNick = new System.Windows.Forms.Label();
-            this.labelNazov = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelLib
@@ -91,30 +90,24 @@ namespace Staem
             this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
-            // labelNazov
-            // 
-            this.labelNazov.AutoSize = true;
-            this.labelNazov.Location = new System.Drawing.Point(116, 109);
-            this.labelNazov.Name = "labelNazov";
-            this.labelNazov.Size = new System.Drawing.Size(35, 13);
-            this.labelNazov.TabIndex = 4;
-            this.labelNazov.Text = "label1";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
-            this.Controls.Add(this.labelNazov);
+            this.ClientSize = new System.Drawing.Size(1904, 1058);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.labelLib);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Staem";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -127,6 +120,5 @@ namespace Staem
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.Label labelNick;
-        private System.Windows.Forms.Label labelNazov;
     }
 }

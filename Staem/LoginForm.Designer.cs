@@ -102,6 +102,7 @@ namespace Staem
             this.passbox.Name = "passbox";
             this.passbox.Size = new System.Drawing.Size(170, 18);
             this.passbox.TabIndex = 3;
+            this.passbox.UseSystemPasswordChar = true;
             // 
             // repeatpassbox
             // 
@@ -113,6 +114,7 @@ namespace Staem
             this.repeatpassbox.Name = "repeatpassbox";
             this.repeatpassbox.Size = new System.Drawing.Size(173, 18);
             this.repeatpassbox.TabIndex = 4;
+            this.repeatpassbox.UseSystemPasswordChar = true;
             // 
             // pictureBox1
             // 
@@ -292,6 +294,7 @@ namespace Staem
             this.Controls.Add(this.userbox);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrácia";
