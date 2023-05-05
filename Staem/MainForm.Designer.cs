@@ -73,6 +73,7 @@ namespace Staem
             this.labelStore.Size = new System.Drawing.Size(103, 25);
             this.labelStore.TabIndex = 2;
             this.labelStore.Text = "OBCHOD";
+            this.labelStore.Click += new System.EventHandler(this.labelStore_Click);
             this.labelStore.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelStore.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
@@ -96,7 +97,7 @@ namespace Staem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1058);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);

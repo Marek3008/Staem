@@ -11,6 +11,7 @@ using System.Drawing.Text;
 using System.IO;
 using MySqlConnector;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace Staem
 {
@@ -19,6 +20,10 @@ namespace Staem
         private User user;
         List<Game> games = new List<Game>();
         private int amount;
+        string hry;
+        Button kupit;
+        Label nazovHry, popis;
+        Panel hlavnyPanel;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -41,6 +46,7 @@ namespace Staem
         {
             //toto robi maximalizovane okno 
             this.WindowState = FormWindowState.Maximized;
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
 
             //pridavam font do mojej kolekcie
             font.AddFontFile(fontPath);
@@ -73,7 +79,7 @@ namespace Staem
             Database.dbConnect();
 
             //tento command zoradi vsetky hry podla IDcka od najemnsieho po najvacsie
-            MySqlCommand cmd = new MySqlCommand($"SELECT ID FROM Games ORDER BY ID ASC", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT COUNT(*) FROM Games", Database.connection);
 
             cmd.CommandType = System.Data.CommandType.Text;
 
@@ -83,7 +89,7 @@ namespace Staem
             //tym padom ziskame pocet hier v tabulke -> pocet vsetkych hier
             while (reader.Read())
             {
-                amount = Convert.ToInt32(reader["ID"]);
+                amount = Convert.ToInt32(reader["COUNT(*)"]);
             }
 
             Database.dbClose();
@@ -216,7 +222,7 @@ namespace Staem
             }
                         
 
-            Panel hlavnyPanel = new Panel
+            hlavnyPanel = new Panel
             {
                 Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2), 150),
                 AutoSize = true,
@@ -225,7 +231,7 @@ namespace Staem
                 Cursor = Cursors.Default
             };
 
-            Label nazovHry = new Label
+            nazovHry = new Label
             {
                 Location = new Point(100, 100),
                 AutoSize = true,
@@ -234,7 +240,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
-            Label popis = new Label
+            popis = new Label
             {
                 Location = new Point(20, 20),                
                 AutoSize = true,
@@ -244,7 +250,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 13, FontStyle.Regular)
             };
 
-            Button kupit = new Button
+            kupit = new Button
             {
                 AutoSize = true,
                 //Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
@@ -256,6 +262,8 @@ namespace Staem
                 BackColor = Color.Black,
             };
 
+            kupit.Click += (sender, e) => kupit_Click(game);
+
             // nechytat sa toho, lebo takto to funguje
             Controls.Add(nazovHry);
 
@@ -266,5 +274,38 @@ namespace Staem
             Controls.Add(hlavnyPanel);
         }
 
+        private void kupit_Click(Game game)
+        {
+            Database.dbConnect();
+            MySqlCommand cmd = new MySqlCommand($"SELECT hry FROM Users WHERE email = '{user.Email}'", Database.connection);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                hry = reader["hry"].ToString();
+            }
+            Database.dbClose();
+
+            hry += $"{game.Name};";
+
+            Database.dbConnect();
+            MySqlCommand cmd1 = new MySqlCommand($"UPDATE Users SET hry = '{hry}' WHERE email = '{user.Email}';", Database.connection);
+            cmd1.ExecuteNonQuery();
+            Database.dbClose();
+        }
+
+        private void labelStore_Click(object sender, EventArgs e)
+        {                
+            foreach(Control control in Controls)
+            {
+                if(control is PictureBox || control is Panel || control is Label)
+                {
+                    control.Visible = true;
+                }
+            }
+
+            hlavnyPanel.Dispose();
+            nazovHry.Dispose();
+            kupit.Dispose();
+        }
     }
 }
