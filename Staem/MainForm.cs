@@ -23,9 +23,19 @@ namespace Staem
         string hry;
         string[] poleHier;
 
+        // objekty pre popis a kupu hry
         Button kupit;
         Label nazovHry, popis;
         Panel hlavnyPanel;
+
+        // objekty pre kniznicu
+        List<Panel> libHry = new List<Panel> ();
+        Label kniznica, libNazov, libKategoria;
+        PictureBox libObrazok;
+
+        // kontrola na ktorej stranke sme
+        bool vHre = false;
+        bool vKniznici = false;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -273,7 +283,8 @@ namespace Staem
 
 
         private void picbox_Click(Game game)
-        {             
+        {
+            vHre = true;
 
             foreach (Control c in this.Controls)
             {
@@ -381,8 +392,8 @@ namespace Staem
         }
 
         private void labelStore_Click(object sender, EventArgs e)
-        {                
-            foreach(Control control in Controls)
+        {
+            foreach (Control control in Controls)
             {
                 if(control is PictureBox || control is Panel || control is Label)
                 {
@@ -390,9 +401,113 @@ namespace Staem
                 }
             }
 
+            /*
             hlavnyPanel.Dispose();
             nazovHry.Dispose();
             kupit.Dispose();
+            */
+
+            foreach (var hra in libHry)
+            {
+                hra.Visible = false;
+            }
+        }
+
+        private void labelLib_Click(object sender, EventArgs e)
+        {
+            vKniznici = true;
+            libHry.Clear();
+
+            foreach (Control c in this.Controls)
+            {
+                c.Visible = false;
+                labelLib.Visible = true;
+                labelNick.Visible = true;
+                labelStore.Visible = true;
+                panel1.Visible = true;
+            }
+
+            kniznica = new Label
+            {
+                Location = new Point(310, 100),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = "Knižnica",
+                Font = new Font(font.Families[0], 20, FontStyle.Bold)
+            };
+
+            poleHier = hry.Split(';');
+            // vymaze posledny index v poli
+            poleHier = poleHier.Take(poleHier.Length - 1).ToArray();
+            string kategoria = "";
+            string cesta = "";
+            int y = 0;
+            int counter = 0;
+
+            foreach (string item in poleHier)
+            {
+                Database.dbConnect();
+                MySqlCommand cmd = new MySqlCommand($"SELECT kategoria, cesta FROM Games WHERE nazov = '{item}'", Database.connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    kategoria = reader["kategoria"].ToString();
+                    cesta = reader["cesta"].ToString();
+                }
+                Database.dbClose();
+                /*
+                Panel libPanel = new Panel
+                {
+                    Location = new Point(310, 200 + y),
+                    Size = new Size(840, 100),
+                    BackColor = Color.FromArgb(57, 102, 132)
+                };
+                */
+
+                libHry.Add(new Panel
+                {
+                    Location = new Point(310, 200 + y),
+                    Size = new Size(840, 100),
+                    BackColor = Color.FromArgb(57, 102, 132)
+                });
+
+                libObrazok = new PictureBox
+                {
+                    Image = Image.FromFile(cesta),
+                    Location = new Point(0, 0),
+                    Size = new Size(200, 100),
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                libNazov = new Label
+                {
+                    Location = new Point(210, 20),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = item,
+                    Font = new Font(font.Families[0], 14, FontStyle.Bold)
+                };
+
+                libKategoria = new Label
+                {
+                    Location = new Point(210, 55),
+                    AutoSize = true,
+                    ForeColor = Color.LightGray, // Gray
+                    Text = kategoria,
+                    Font = new Font(font.Families[0], 11, FontStyle.Italic)
+                };
+
+                y += 110;
+
+                Controls.Add(kniznica);
+                libHry[counter].Controls.Add(libObrazok);
+                libHry[counter].Controls.Add(libNazov);
+                libHry[counter].Controls.Add(libKategoria);
+                
+                Controls.Add(libHry[counter]);
+
+                counter++;
+            }
         }
 
         private void labelPanel_hover(object sender, EventArgs e)

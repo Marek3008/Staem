@@ -49,6 +49,7 @@ namespace Staem
             this.labelLib.Size = new System.Drawing.Size(105, 24);
             this.labelLib.TabIndex = 0;
             this.labelLib.Text = "KNIŽNICA";
+            this.labelLib.Click += new System.EventHandler(this.labelLib_Click);
             this.labelLib.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelLib.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
@@ -97,7 +98,7 @@ namespace Staem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1904, 1058);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);
