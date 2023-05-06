@@ -39,6 +39,11 @@ namespace Staem
             get; set;
         }
 
+        public bool MamTutoHru
+        {
+            get; set;
+        }
+
         public Game(string name, string category, string description, string price, string developer, string path)
         {
             this.Name = name;
