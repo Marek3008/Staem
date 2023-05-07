@@ -426,15 +426,6 @@ namespace Staem
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
-            foreach (Control c in this.Controls)
-            {
-                c.Visible = false;
-                labelLib.Visible = true;
-                labelNick.Visible = true;
-                labelStore.Visible = true;
-                panel1.Visible = true;
-            }
-
             kniznica = new Label
             {
                 Location = new Point(310, 100),
@@ -443,6 +434,22 @@ namespace Staem
                 Text = "Knižnica",
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
+
+
+            foreach (Control c in this.Controls)
+            {
+                
+                c.Visible = false;
+                
+                
+                labelLib.Visible = true;
+                labelNick.Visible = true;
+                labelStore.Visible = true;
+                panel1.Visible = true;
+            }
+
+            Controls.Add(kniznica);
+
 
             //do pola davam hry
             poleHier = hry.Split(';');
@@ -516,7 +523,7 @@ namespace Staem
                 y += 110;
 
                 //po kazdej iteracii pridam do controlsov panely => po dokonceni cyklu sa mi zobrazia vsetky panely
-                Controls.Add(kniznica);
+                
                 libHry[counter].Controls.Add(libObrazok);
                 libHry[counter].Controls.Add(libNazov);
                 libHry[counter].Controls.Add(libKategoria);
