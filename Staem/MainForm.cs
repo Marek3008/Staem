@@ -361,6 +361,8 @@ namespace Staem
                     }
                 }
             }
+
+            vHre = true;
                 
         }
 
@@ -398,24 +400,30 @@ namespace Staem
                 if(control is PictureBox || control is Panel || control is Label)
                 {
                     control.Visible = true;
+
+                    //takto to konecne funguje
+                    foreach (var hra in libHry)
+                    {
+                        hra.Dispose();
+                    }
                 }
             }
 
-            /*
-            hlavnyPanel.Dispose();
-            nazovHry.Dispose();
-            kupit.Dispose();
-            */
-
-            foreach (var hra in libHry)
+            //iba ak som hned predtym klikol na hru lebo kebyze idem z kniznice do obchodu tak sa disposuje nieco co je null takze to hadze error
+            if (vHre)
             {
-                hra.Visible = false;
-            }
+                hlavnyPanel.Dispose();
+                nazovHry.Dispose();
+                kupit.Dispose();
+                vHre = false;
+            }              
         }
 
         private void labelLib_Click(object sender, EventArgs e)
         {
             vKniznici = true;
+
+            //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
             foreach (Control c in this.Controls)
@@ -436,6 +444,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
+            //do pola davam hry
             poleHier = hry.Split(';');
             // vymaze posledny index v poli
             poleHier = poleHier.Take(poleHier.Length - 1).ToArray();
@@ -444,11 +453,16 @@ namespace Staem
             int y = 0;
             int counter = 0;
 
+
+            //tento foreach sa robi tolko krat kolko hier user vlastni
             foreach (string item in poleHier)
             {
+                //vyberie sa kategoria a cesta k obrazku (nazov mame)
                 Database.dbConnect();
                 MySqlCommand cmd = new MySqlCommand($"SELECT kategoria, cesta FROM Games WHERE nazov = '{item}'", Database.connection);
                 MySqlDataReader reader = cmd.ExecuteReader();
+
+                //veci sa zapisu do premennych
                 while (reader.Read())
                 {
                     kategoria = reader["kategoria"].ToString();
@@ -464,6 +478,8 @@ namespace Staem
                 };
                 */
 
+
+                //toto pridava panely do listu odkial ich potom vypisujem
                 libHry.Add(new Panel
                 {
                     Location = new Point(310, 200 + y),
@@ -499,6 +515,7 @@ namespace Staem
 
                 y += 110;
 
+                //po kazdej iteracii pridam do controlsov panely => po dokonceni cyklu sa mi zobrazia vsetky panely
                 Controls.Add(kniznica);
                 libHry[counter].Controls.Add(libObrazok);
                 libHry[counter].Controls.Add(libNazov);
