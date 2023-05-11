@@ -27,6 +27,7 @@ namespace Staem
         Button kupit;
         Label nazovHry, popis;
         Panel hlavnyPanel;
+        PictureBox nahladHry;
 
         // objekty pre kniznicu
         List<Panel> libHry = new List<Panel> ();
@@ -35,7 +36,6 @@ namespace Staem
 
         // kontrola na ktorej stranke sme
         bool vHre = false;
-        bool vKniznici = false;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -199,6 +199,13 @@ namespace Staem
                 this.Controls.Add(panelCena);
             }
         }
+
+        // metoda na "galeriu" obrazkov
+        public void addPic()
+        {
+
+        }
+
         //"""""""""""""""""""""""""""""""""""""""""""""""""              METODY         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -294,11 +301,11 @@ namespace Staem
                 labelStore.Visible = true;
                 panel1.Visible = true;
             }
-                        
+
             //tieto veci pridavaju nove controls
             hlavnyPanel = new Panel
             {
-                Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2), 150),
+                Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2) + 200, 150),
                 AutoSize = true,
                 MaximumSize = new Size(840, 0),
                 BackColor = Color.FromArgb(103, 103, 178),
@@ -314,6 +321,14 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
+            nahladHry = new PictureBox
+            {
+                Image = Image.FromFile("obrazky/csgo-nahlad.jpg"),
+                Location = new Point(100, 150),
+                Size = new Size(600, 300),
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+
             popis = new Label
             {
                 Location = new Point(20, 20),                
@@ -324,11 +339,14 @@ namespace Staem
                 Font = new Font(font.Families[0], 13, FontStyle.Regular)
             };
 
+            Controls.Add(popis);
+            Size labelSize = popis.GetPreferredSize(Size.Empty);
+
             kupit = new Button
             {
                 AutoSize = true,
                 //Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
-                Location = new Point(200, 200),
+                Location = new Point(700, labelSize.Height + 30),
                 Text = game.Price,
                 ForeColor = Color.White,
                 Cursor = Cursors.Hand,
@@ -341,11 +359,11 @@ namespace Staem
 
             // nechytat sa toho, lebo takto to funguje
             Controls.Add(nazovHry);
+            Controls.Add(nahladHry);
 
-            hlavnyPanel.Controls.Add(popis);
             hlavnyPanel.Controls.Add(kupit);
+            hlavnyPanel.Controls.Add(popis);
 
-            Controls.Add(kupit);
             Controls.Add(hlavnyPanel);
 
             //toto kontroluje ci je hra zakupena (mohlo to byt aj vo funkcii ale vzhladom na error ktory neviem pochopit to tam byt nemoze)
@@ -415,14 +433,13 @@ namespace Staem
                 hlavnyPanel.Dispose();
                 nazovHry.Dispose();
                 kupit.Dispose();
+                nahladHry.Dispose();
                 vHre = false;
             }              
         }
 
         private void labelLib_Click(object sender, EventArgs e)
         {
-            vKniznici = true;
-
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
