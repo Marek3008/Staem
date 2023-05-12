@@ -22,12 +22,17 @@ namespace Staem
         private int amount;
         string hry;
         string[] poleHier;
+        string temp;
+        
+        int currentN = 0;
+        int maxN = 0;
 
         // objekty pre popis a kupu hry
         Button kupit;
         Label nazovHry, popis;
         Panel hlavnyPanel;
         PictureBox nahladHry;
+        TransparentButton back, next;
 
         // objekty pre kniznicu
         List<Panel> libHry = new List<Panel> ();
@@ -200,11 +205,6 @@ namespace Staem
             }
         }
 
-        // metoda na "galeriu" obrazkov
-        public void addPic()
-        {
-
-        }
 
         //"""""""""""""""""""""""""""""""""""""""""""""""""              METODY         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
         //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,10 +288,27 @@ namespace Staem
             Application.Exit();
         }
 
-
         private void picbox_Click(Game game)
         {
             vHre = true;
+
+            // nacita nahladove obrazky do listu (ked som to skusal v metode tak pisalo chybu ArgumentOutOfRangeException, ale neviem preco)
+            List<string> nahladoveObrazky = new List<string>();
+            Database.dbConnect();
+            MySqlCommand cmd = new MySqlCommand($"SELECT nahladObrazok FROM Games WHERE nazov = '{game.Name}'", Database.connection);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                temp = reader["nahladObrazok"].ToString();
+            }
+            Database.dbClose();
+
+            nahladoveObrazky = temp.Split(';').ToList();
+            temp = "";
+            maxN = nahladoveObrazky.Count;
+
 
             foreach (Control c in this.Controls)
             {
@@ -323,11 +340,27 @@ namespace Staem
 
             nahladHry = new PictureBox
             {
-                Image = Image.FromFile("obrazky/csgo-nahlad.jpg"),
+                Image = Image.FromFile(nahladoveObrazky[currentN]),
                 Location = new Point(100, 150),
                 Size = new Size(600, 300),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
+
+            // buttony na prepinanie nahladovych obrazkov
+            next = new TransparentButton
+            {
+                Size = new Size(72, 72),
+                Location = new Point(600 - 72, 150 - (72 / 2)),
+                Image = Image.FromFile("obrazky/next.png"),
+            };
+ 
+            back = new TransparentButton
+            {
+                Size = new Size(72, 72),
+                Location = new Point(0, 150 - (72 / 2)),
+                Image = Image.FromFile("obrazky/prev.png"),
+            };
+            // buttony na prepinanie nahladovych obrazkov
 
             popis = new Label
             {
@@ -345,7 +378,6 @@ namespace Staem
             kupit = new Button
             {
                 AutoSize = true,
-                //Location = new Point((1920 / 2) - (100 / 2), popis.Height + 300 + 50),
                 Location = new Point(700, labelSize.Height + 30),
                 Text = game.Price,
                 ForeColor = Color.White,
@@ -359,11 +391,16 @@ namespace Staem
 
             // nechytat sa toho, lebo takto to funguje
             Controls.Add(nazovHry);
-            Controls.Add(nahladHry);
+
+            nahladHry.Controls.Add(next);
+            next.Click += (sender, e) => next_Click(nahladoveObrazky);
+            nahladHry.Controls.Add(back);
+            back.Click += (sender, e) => back_Click(nahladoveObrazky);
 
             hlavnyPanel.Controls.Add(kupit);
             hlavnyPanel.Controls.Add(popis);
 
+            Controls.Add(nahladHry);
             Controls.Add(hlavnyPanel);
 
             //toto kontroluje ci je hra zakupena (mohlo to byt aj vo funkcii ale vzhladom na error ktory neviem pochopit to tam byt nemoze)
@@ -382,6 +419,34 @@ namespace Staem
 
             vHre = true;
                 
+        }
+
+        private void next_Click(List<string> nahladoveObrazky)
+        {
+            currentN++;
+
+            if (currentN > maxN)
+            {
+                currentN = maxN;
+            }
+            else if (currentN < maxN)
+            {
+                nahladHry.Image = Image.FromFile(nahladoveObrazky[currentN]);
+            }
+        }
+
+        private void back_Click(List<string> nahladoveObrazky)
+        {
+            currentN--;
+
+            if (currentN < 0)
+            {
+                currentN = 0;
+            }
+            else if (currentN < maxN)
+            {
+                nahladHry.Image = Image.FromFile(nahladoveObrazky[currentN]);
+            }
         }
 
         private void kupit_Click(Game game)
