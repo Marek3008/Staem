@@ -340,7 +340,7 @@ namespace Staem
 
             nahladHry = new PictureBox
             {
-                Image = Image.FromFile(nahladoveObrazky[currentN]),
+                Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]),
                 Location = new Point(100, 150),
                 Size = new Size(600, 300),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -431,7 +431,7 @@ namespace Staem
             }
             else if (currentN < maxN)
             {
-                nahladHry.Image = Image.FromFile(nahladoveObrazky[currentN]);
+                nahladHry.Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]);
             }
         }
 
@@ -445,7 +445,7 @@ namespace Staem
             }
             else if (currentN < maxN)
             {
-                nahladHry.Image = Image.FromFile(nahladoveObrazky[currentN]);
+                nahladHry.Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]);
             }
         }
 
