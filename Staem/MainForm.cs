@@ -291,6 +291,7 @@ namespace Staem
         private void picbox_Click(Game game)
         {
             vHre = true;
+            currentN = 0;
 
             // nacita nahladove obrazky do listu (ked som to skusal v metode tak pisalo chybu ArgumentOutOfRangeException, ale neviem preco)
             List<string> nahladoveObrazky = new List<string>();
@@ -425,9 +426,9 @@ namespace Staem
         {
             currentN++;
 
-            if (currentN > maxN)
+            if (currentN > 1)
             {
-                currentN = maxN;
+                currentN = 1;
             }
             else if (currentN < maxN)
             {
