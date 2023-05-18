@@ -12,6 +12,7 @@ using System.IO;
 using MySqlConnector;
 using System.Data.SqlClient;
 using System.Windows;
+using System.Security.AccessControl;
 
 namespace Staem
 {
@@ -36,7 +37,7 @@ namespace Staem
 
         // objekty pre kniznicu
         List<Panel> libHry = new List<Panel> ();
-        Label kniznica, libNazov, libKategoria;
+        Label kniznica, libNazov, libKategoria, nemasHru;
         PictureBox libObrazok;
 
         // kontrola na ktorej stranke sme
@@ -341,7 +342,7 @@ namespace Staem
 
             nahladHry = new PictureBox
             {
-                Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]),
+                Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[0]),
                 Location = new Point(100, 150),
                 Size = new Size(600, 300),
                 SizeMode = PictureBoxSizeMode.StretchImage
@@ -479,6 +480,7 @@ namespace Staem
 
         private void labelStore_Click(object sender, EventArgs e)
         {
+            // vymazava vsetko co sa nachadza v kniznici
             foreach (Control control in Controls)
             {
                 if(control is PictureBox || control is Panel || control is Label)
@@ -518,13 +520,21 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
+            if (hry == "")
+            {
+                nemasHru = new Label
+                {
+                    Location = new Point(310, 150),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Momentálne nemáš žiadnu hru",
+                    Font = new Font(font.Families[0], 15, FontStyle.Italic)
+                };
+            }
 
             foreach (Control c in this.Controls)
             {
-                
                 c.Visible = false;
-                
-                
                 labelLib.Visible = true;
                 labelNick.Visible = true;
                 labelStore.Visible = true;
@@ -532,6 +542,7 @@ namespace Staem
             }
 
             Controls.Add(kniznica);
+            Controls.Add(nemasHru);
 
 
             //do pola davam hry
