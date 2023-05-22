@@ -20,6 +20,7 @@ namespace Staem
     {
         private User user;
         List<Game> games = new List<Game>();
+        List<string> category = new List<string>();
         private int amount;
         string hry;
         string[] poleHier;
@@ -156,7 +157,7 @@ namespace Staem
                 PictureBox picbox = new PictureBox
                 {
                     Image = Image.FromFile(path),
-                    Location = new Point(310 + x, 85 + y),
+                    Location = new Point(110 + x, 85 + y),
                     Size = new Size(400, 200),
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Cursor = Cursors.Hand
@@ -164,7 +165,7 @@ namespace Staem
 
                 Panel panelCena = new Panel
                 {
-                    Location = new Point(310 + x, 285 + y),
+                    Location = new Point(110 + x, 285 + y),
                     Size = new Size(400, 35),
                     BackColor = Color.FromArgb(57, 102, 132),
                     Cursor = Cursors.Hand
@@ -172,7 +173,7 @@ namespace Staem
 
                 Label cena = new Label
                 {
-                    Location = new Point(320 + x, 292 + y),
+                    Location = new Point(120 + x, 292 + y),
                     AutoSize = true,
                     Padding = new Padding(2),
                     BackColor = Color.FromArgb(38, 62, 85),
@@ -203,6 +204,80 @@ namespace Staem
                 panelCena.Controls.Add(cena);
                 this.Controls.Add(cena);
                 this.Controls.Add(panelCena);
+            }
+        }
+
+        public void getCategory()
+        {
+            string[] temp;
+
+            foreach (var item in games)
+            {
+                if (item.Category.ToString().Contains(','))
+                {
+                    temp = item.Category.ToString().Split(',');
+
+                    foreach (var item2 in temp)
+                    {
+                        if (category.Contains(item2))
+                        {
+                            continue;
+                        }
+
+                        category.Add(item2);
+                    }
+
+                    temp = null;
+                }
+                else
+                {
+                    if (category.Contains(item.Category))
+                    {
+                        temp = null;
+                        continue;
+                    }
+
+                    category.Add(item.Category);
+
+                    temp = null;
+                }
+            }
+        }
+
+        public void drawCategory()
+        {
+            int y = 0;
+
+            // vypise ponuku vyberu hier podla kategorii
+            Label nazovKategorie = new Label
+            {
+                Location = new Point(1510, 85),
+                AutoSize = true,
+                BackColor = Color.Transparent,
+                ForeColor = Color.White,
+                Text = "Kategórie",
+                Font = new Font(font.Families[0], 18, FontStyle.Regular)
+            };
+            Controls.Add(nazovKategorie);
+
+            foreach (var categ in category)
+            {
+                Label vyberKategoria = new Label
+                {
+                    Location = new Point(1520, 125 + y),
+                    AutoSize = true,
+                    BackColor = Color.Transparent,
+                    ForeColor = Color.White,
+                    Text = categ,
+                    Font = new Font(font.Families[0], 13, FontStyle.Underline),
+                    Cursor = Cursors.Hand
+                };
+
+                vyberKategoria.Click += (sender, e) => vyberKategorie_Click(categ);
+
+                y += 40;
+
+                Controls.Add(vyberKategoria);
             }
         }
 
@@ -282,11 +357,20 @@ namespace Staem
             getAmount();
             getGame();
             drawGames();
+
+            getCategory();
+            category.Sort();
+            drawCategory();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        public void vyberKategorie_Click(string a)
+        {
+            // vypisanie hier podla kategorie
         }
 
         private void picbox_Click(Game game)

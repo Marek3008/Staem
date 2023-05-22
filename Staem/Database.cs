@@ -10,7 +10,7 @@ namespace Staem
     class Database
     {
         //tymto "stringom" sa pripajame k databaze
-        public static MySqlConnection connection = new MySqlConnection("Server=banas.vybrat.eu;User ID=c48admin;Password=T2QZm7az#gR;Database=c48steamV2;AllowUserVariables=True;");
+        public static MySqlConnection connection = new MySqlConnection("Server=localhost;User ID=root;Password=;Database=c48steamV2;AllowUserVariables=True;");
 
         public static void dbConnect()
         {
