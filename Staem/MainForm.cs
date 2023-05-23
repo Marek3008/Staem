@@ -12,7 +12,7 @@ using System.IO;
 using MySqlConnector;
 using System.Data.SqlClient;
 using System.Windows;
-using System.Security.AccessControl;
+using System.Diagnostics.Metrics;
 
 namespace Staem
 {
@@ -22,9 +22,12 @@ namespace Staem
         List<Game> games = new List<Game>();
         List<string> category = new List<string>();
         private int amount;
-        string hry;
+        string hry, temp;
         string[] poleHier;
-        string temp;
+        
+        // kategoria
+        string kliknutaKategoria = "";
+        List<Label> klikCategory = new List<Label>();
         
         int currentN = 0;
         int maxN = 0;
@@ -43,6 +46,7 @@ namespace Staem
 
         // kontrola na ktorej stranke sme
         bool vHre = false;
+        bool vKniznici = false;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -213,9 +217,9 @@ namespace Staem
 
             foreach (var item in games)
             {
-                if (item.Category.ToString().Contains(','))
+                if (item.Category.Contains(","))
                 {
-                    temp = item.Category.ToString().Split(',');
+                    temp = item.Category.Split(',');
 
                     foreach (var item2 in temp)
                     {
@@ -233,13 +237,10 @@ namespace Staem
                 {
                     if (category.Contains(item.Category))
                     {
-                        temp = null;
                         continue;
                     }
 
                     category.Add(item.Category);
-
-                    temp = null;
                 }
             }
         }
@@ -256,7 +257,7 @@ namespace Staem
                 BackColor = Color.Transparent,
                 ForeColor = Color.White,
                 Text = "Kategórie",
-                Font = new Font(font.Families[0], 18, FontStyle.Regular)
+                Font = new Font(font.Families[0], 18, FontStyle.Bold)
             };
             Controls.Add(nazovKategorie);
 
@@ -272,6 +273,14 @@ namespace Staem
                     Font = new Font(font.Families[0], 13, FontStyle.Underline),
                     Cursor = Cursors.Hand
                 };
+
+                if (vyberKategoria.Text == kliknutaKategoria)
+                {
+                    vyberKategoria.Font = new Font(font.Families[0], 17, FontStyle.Bold);
+                    vyberKategoria.ForeColor = Color.Aqua;
+                    klikCategory.Add(vyberKategoria);
+                    kliknutaKategoria = "";
+                }
 
                 vyberKategoria.Click += (sender, e) => vyberKategorie_Click(categ);
 
@@ -368,9 +377,85 @@ namespace Staem
             Application.Exit();
         }
 
-        public void vyberKategorie_Click(string a)
+        public void vyberKategorie_Click(string c)
         {
-            // vypisanie hier podla kategorie
+            kliknutaKategoria = c;
+            int x = 0, y = 0;
+            int counter = 0;
+
+            foreach (Control co in this.Controls)
+            {
+                co.Visible = false;
+                labelLib.Visible = true;
+                labelNick.Visible = true;
+                labelStore.Visible = true;
+                panel1.Visible = true;
+            }
+
+            drawCategory();
+
+            foreach (var item in games)
+            {
+                if (item.Category.Contains(c))
+                {
+                    //do premennej typu string sa zapise absolutna cesta obrazku; napr.: Path = "csgo.png" => v PC sa najde tento subor a zisti sa jeho absolutna cesta
+                    //tento sposob je trosku komplikovanejsi ale aplikacia nechcela spracovat relativnu cestu obrazka, preto sa v hocijakom zariadeni zisti nova absolutna cesta
+                    string path = Path.GetFullPath(item.Path);
+
+                    //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
+                    //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
+                    PictureBox picbox = new PictureBox
+                    {
+                        Image = Image.FromFile(path),
+                        Location = new Point(110 + x, 85 + y),
+                        Size = new Size(400, 200),
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Cursor = Cursors.Hand
+                    };
+
+                    Panel panelCena = new Panel
+                    {
+                        Location = new Point(110 + x, 285 + y),
+                        Size = new Size(400, 35),
+                        BackColor = Color.FromArgb(57, 102, 132),
+                        Cursor = Cursors.Hand
+                    };
+
+                    Label cena = new Label
+                    {
+                        Location = new Point(120 + x, 292 + y),
+                        AutoSize = true,
+                        Padding = new Padding(2),
+                        BackColor = Color.FromArgb(38, 62, 85),
+                        ForeColor = Color.White,
+                        Text = item.Price,
+                        Font = new Font(font.Families[0], 10, FontStyle.Regular), // moze byt aj FontStyle.Bold
+                        Cursor = Cursors.Hand
+                    };
+
+
+                    //vdaka tomuto divokemu zapisu mozem do onclick metody passnut argument
+                    picbox.Click += (sender, e) => picbox_Click(item);
+                    panelCena.Click += (sender, e) => picbox_Click(item);
+                    cena.Click += (sender, e) => picbox_Click(item);
+                    x += 450;
+                    counter++;
+
+                    if ((counter % 3) == 0)
+                    {
+                        x = 0;
+                        y += 278;
+                    }
+
+                    //VELMI DOLEZITE!!!; toto robi to ze dane "ovladanie" (label, textbox, ...) mozeme naozaj aj vidiet; bez tohoto by objekt picbox zaberal iba miesto v pamati
+                    this.Controls.Add(picbox);
+                    panelCena.Controls.Add(cena);
+                    this.Controls.Add(cena);
+                    this.Controls.Add(panelCena);
+                }
+            }
+
+            kliknutaKategoria = "";
         }
 
         private void picbox_Click(Game game)
@@ -562,12 +647,13 @@ namespace Staem
 
         }
 
+        // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
             // vymazava vsetko co sa nachadza v kniznici
             foreach (Control control in Controls)
             {
-                if(control is PictureBox || control is Panel || control is Label)
+                if (control is PictureBox || control is Panel || control is Label)
                 {
                     control.Visible = true;
 
@@ -578,6 +664,18 @@ namespace Staem
                     }
                 }
             }
+            
+            foreach (var i in klikCategory)
+            {
+                i.Dispose();
+            }
+
+            if (vKniznici)
+            {
+                kniznica.Dispose();
+                nemasHru.Dispose();
+                vKniznici = false;
+            }
 
             //iba ak som hned predtym klikol na hru lebo kebyze idem z kniznice do obchodu tak sa disposuje nieco co je null takze to hadze error
             if (vHre)
@@ -587,11 +685,12 @@ namespace Staem
                 kupit.Dispose();
                 nahladHry.Dispose();
                 vHre = false;
-            }              
+            }
         }
 
         private void labelLib_Click(object sender, EventArgs e)
         {
+            vKniznici = true;
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
