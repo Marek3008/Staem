@@ -13,6 +13,7 @@ using MySqlConnector;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Diagnostics.Metrics;
+using System.Net.Http.Headers;
 
 namespace Staem
 {
@@ -34,14 +35,14 @@ namespace Staem
 
         // objekty pre popis a kupu hry
         Button kupit;
-        Label nazovHry, popis;
+        Label nazovHry, popis, vyvojar;
         Panel hlavnyPanel;
         PictureBox nahladHry;
         TransparentButton back, next;
 
         // objekty pre kniznicu
-        List<Panel> libHry = new List<Panel> ();
-        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru;
+        List<Control> libHry = new List<Control> ();
+        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
         PictureBox libObrazok;
 
         // kontrola na ktorej stranke sme
@@ -366,6 +367,18 @@ namespace Staem
             }
             Database.dbClose();
 
+            nemasHru = new Label
+            {
+                Location = new Point(310, 150),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = "Momentálne nemáš žiadnu hru",
+                Font = new Font(font.Families[0], 15, FontStyle.Italic)
+            };
+
+            Controls.Add(nemasHru);
+            nemasHru.Visible = false;
+
 
             getAmount();
             getGame();
@@ -513,6 +526,15 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
+            vyvojar = new Label
+            {
+                Location = new Point(100, 120),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = game.Developer,
+                Font = new Font(font.Families[0], 15, FontStyle.Italic)
+            };
+
             nahladHry = new PictureBox
             {
                 Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[0]),
@@ -566,6 +588,7 @@ namespace Staem
 
             // nechytat sa toho, lebo takto to funguje
             Controls.Add(nazovHry);
+            Controls.Add(vyvojar);
 
             nahladHry.Controls.Add(next);
             next.Click += (sender, e) => next_Click(nahladoveObrazky);
@@ -609,6 +632,7 @@ namespace Staem
                 nahladHry.Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]);
             }
         }
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -659,34 +683,35 @@ namespace Staem
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
-            // vymazava vsetko co sa nachadza v kniznici
+
             foreach (Control control in Controls)
             {
-                if (control is PictureBox || control is Panel || (control is Label && control != nemasHru))
+                if (control is PictureBox || control is Panel || control is Label)
                 {
                     control.Visible = true;
-                    
-
-                    //takto to konecne funguje
-                    foreach (var hra in libHry)
-                    {
-                        hra.Dispose();
-                    }
                 }
+
             }
-            
+
+
+            foreach (var hra in libHry)
+            {
+                hra.Dispose();
+            }
+
             foreach (var i in klikCategory)
             {
                 i.Dispose();
             }
 
+            // vymazava vsetko co sa nachadza v kniznici
             if (vKniznici)
             {
                 if(hry == "")
                 {
-                    nemasHru.Dispose();
+                    nemasHru.Visible = false;
                 }
-
+                    
                 kniznica.Dispose();                
                 vKniznici = false;
             }
@@ -698,6 +723,7 @@ namespace Staem
                 nazovHry.Dispose();
                 kupit.Dispose();
                 nahladHry.Dispose();
+                vyvojar.Dispose();
                 vHre = false;
             }
         }
@@ -714,8 +740,6 @@ namespace Staem
             }
             Database.dbClose();
 
-            poleHier = hry.Split(';');
-
 
             vKniznici = true;
             //toto by malo vyprazdnit list ale bohvie ci funguje
@@ -730,17 +754,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
-            if (hry == "")
-            {
-                nemasHru = new Label
-                {
-                    Location = new Point(310, 150),
-                    AutoSize = true,
-                    ForeColor = Color.White,
-                    Text = "Momentálne nemáš žiadnu hru",
-                    Font = new Font(font.Families[0], 15, FontStyle.Italic)
-                };
-            }
+            
 
             foreach (Control c in this.Controls)
             {
@@ -752,8 +766,13 @@ namespace Staem
                 pictureBox1.Visible = true;
             }
 
+            if(hry == "")
+            {
+                nemasHru.Visible = true;
+            }
+
             Controls.Add(kniznica);
-            Controls.Add(nemasHru);
+            
 
 
             //do pola davam hry
@@ -819,11 +838,21 @@ namespace Staem
 
                 libOdobrat = new Label
                 {
-                    Location = new Point(700, 20),
+                    Location = new Point(735, 20),
                     AutoSize = true,
                     ForeColor = Color.White,
                     Text = "Odobrať",
                     Font = new Font(font.Families[0], 11, FontStyle.Regular),
+                    Cursor = Cursors.Hand
+                };
+
+                libHrat = new Label
+                {
+                    Location = new Point(759, 60),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Hrať",
+                    Font = new Font(font.Families[0], 13, FontStyle.Underline),
                     Cursor = Cursors.Hand
                 };
 
@@ -835,8 +864,10 @@ namespace Staem
                 libHry[counter].Controls.Add(libNazov);
                 libHry[counter].Controls.Add(libKategoria);
                 libHry[counter].Controls.Add(libOdobrat);
+                libHry[counter].Controls.Add(libHrat);
 
                 libOdobrat.Click += (sender2, e2) => libOdobrat_Click(item);
+                libHrat.Click += (sender3, e3) => libHrat_Click(item);
 
                 Controls.Add(libHry[counter]);
 
@@ -854,11 +885,19 @@ namespace Staem
 
             Database.dbClose();
 
-            //tohoto sa nechytat; labelLib_Click chcel pri zavolani nejake argumetny typu vid nizsie tak som ich tam dal
-            object ahoj = new object();
-            EventArgs ahoj2 = new EventArgs();
+            foreach(var item in libHry)
+            {
+                item.Dispose();
+            }
 
-            labelLib_Click(ahoj, ahoj2);
+            //tohoto sa nechytat; labelLib_Click chcel pri zavolani nejake argumetny typu vid nizsie tak som ich tam dal
+
+            labelLib_Click(new object(), new EventArgs());
+        }
+
+        private void libHrat_Click(string hra)
+        {
+            MessageBox.Show($"Teraz hráš {hra}");
         }
 
         private void labelPanel_hover(object sender, EventArgs e)
