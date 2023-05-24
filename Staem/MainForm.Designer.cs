@@ -36,6 +36,8 @@ namespace Staem
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStore = new System.Windows.Forms.Label();
             this.labelNick = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelLib
@@ -84,13 +86,24 @@ namespace Staem
             this.labelNick.Cursor = System.Windows.Forms.Cursors.Hand;
             this.labelNick.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNick.ForeColor = System.Drawing.Color.White;
-            this.labelNick.Location = new System.Drawing.Point(1730, 12);
+            this.labelNick.Location = new System.Drawing.Point(1625, 12);
             this.labelNick.Name = "labelNick";
             this.labelNick.Size = new System.Drawing.Size(72, 25);
             this.labelNick.TabIndex = 3;
             this.labelNick.Text = "Marek";
             this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
             this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(1818, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // MainForm
             // 
@@ -99,6 +112,7 @@ namespace Staem
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1904, 1058);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
             this.Controls.Add(this.panel1);
@@ -111,6 +125,7 @@ namespace Staem
             this.Text = "Staem";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +137,6 @@ namespace Staem
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.Label labelNick;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

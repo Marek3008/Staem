@@ -41,12 +41,15 @@ namespace Staem
 
         // objekty pre kniznicu
         List<Panel> libHry = new List<Panel> ();
-        Label kniznica, libNazov, libKategoria, nemasHru;
+        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru;
         PictureBox libObrazok;
 
         // kontrola na ktorej stranke sme
         bool vHre = false;
         bool vKniznici = false;
+
+
+        bool closedForm = false;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -59,7 +62,8 @@ namespace Staem
         public MainForm(User user)
         {
             InitializeComponent();
-            this.user = user;            
+            
+            this.user = user;
             
             labelNick.Text = (user.checkedUserID).ToUpper();            
         }
@@ -606,6 +610,11 @@ namespace Staem
             }
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
         private void back_Click(List<string> nahladoveObrazky)
         {
             currentN--;
@@ -653,9 +662,10 @@ namespace Staem
             // vymazava vsetko co sa nachadza v kniznici
             foreach (Control control in Controls)
             {
-                if (control is PictureBox || control is Panel || control is Label)
+                if (control is PictureBox || control is Panel || (control is Label && control != nemasHru))
                 {
                     control.Visible = true;
+                    
 
                     //takto to konecne funguje
                     foreach (var hra in libHry)
@@ -672,8 +682,12 @@ namespace Staem
 
             if (vKniznici)
             {
-                kniznica.Dispose();
-                nemasHru.Dispose();
+                if(hry == "")
+                {
+                    nemasHru.Dispose();
+                }
+
+                kniznica.Dispose();                
                 vKniznici = false;
             }
 
@@ -690,6 +704,19 @@ namespace Staem
 
         private void labelLib_Click(object sender, EventArgs e)
         {
+
+            Database.dbConnect();
+            MySqlCommand cmd2 = new MySqlCommand($"SELECT hry FROM Users WHERE email = '{user.Email}';", Database.connection);
+            MySqlDataReader reader2 = cmd2.ExecuteReader();
+            while (reader2.Read())
+            {
+                hry = reader2["hry"].ToString();
+            }
+            Database.dbClose();
+
+            poleHier = hry.Split(';');
+
+
             vKniznici = true;
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
@@ -722,6 +749,7 @@ namespace Staem
                 labelNick.Visible = true;
                 labelStore.Visible = true;
                 panel1.Visible = true;
+                pictureBox1.Visible = true;
             }
 
             Controls.Add(kniznica);
@@ -753,15 +781,7 @@ namespace Staem
                     cesta = reader["cesta"].ToString();
                 }
                 Database.dbClose();
-                /*
-                Panel libPanel = new Panel
-                {
-                    Location = new Point(310, 200 + y),
-                    Size = new Size(840, 100),
-                    BackColor = Color.FromArgb(57, 102, 132)
-                };
-                */
-
+                
 
                 //toto pridava panely do listu odkial ich potom vypisujem
                 libHry.Add(new Panel
@@ -797,6 +817,16 @@ namespace Staem
                     Font = new Font(font.Families[0], 11, FontStyle.Italic)
                 };
 
+                libOdobrat = new Label
+                {
+                    Location = new Point(700, 20),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Odobrať",
+                    Font = new Font(font.Families[0], 11, FontStyle.Regular),
+                    Cursor = Cursors.Hand
+                };
+
                 y += 110;
 
                 //po kazdej iteracii pridam do controlsov panely => po dokonceni cyklu sa mi zobrazia vsetky panely
@@ -804,11 +834,31 @@ namespace Staem
                 libHry[counter].Controls.Add(libObrazok);
                 libHry[counter].Controls.Add(libNazov);
                 libHry[counter].Controls.Add(libKategoria);
-                
+                libHry[counter].Controls.Add(libOdobrat);
+
+                libOdobrat.Click += (sender2, e2) => libOdobrat_Click(item);
+
                 Controls.Add(libHry[counter]);
 
                 counter++;
             }
+        }
+
+        private void libOdobrat_Click(string hra)
+        {
+            Database.dbConnect();
+
+            //tento command odobera z databazy hry
+            MySqlCommand cmd = new MySqlCommand($"UPDATE Users SET hry = REPLACE(hry, '{hra};', '') WHERE email = '{user.Email}';", Database.connection);
+            cmd.ExecuteNonQuery();
+
+            Database.dbClose();
+
+            //tohoto sa nechytat; labelLib_Click chcel pri zavolani nejake argumetny typu vid nizsie tak som ich tam dal
+            object ahoj = new object();
+            EventArgs ahoj2 = new EventArgs();
+
+            labelLib_Click(ahoj, ahoj2);
         }
 
         private void labelPanel_hover(object sender, EventArgs e)
