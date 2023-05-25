@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staem.Components
 {
-    internal class libLabel : Label
+    internal class LibLabel : Label
     {
     }
 }
