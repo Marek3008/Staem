@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Diagnostics.Metrics;
 using System.Net.Http.Headers;
+using Staem.Components;
 
 namespace Staem
 {
@@ -34,23 +35,24 @@ namespace Staem
         int maxN = 0;
 
         // objekty pre popis a kupu hry
-        Button kupit;
-        Label nazovHry, popis, vyvojar;
-        Panel hlavnyPanel;
-        PictureBox nahladHry;
+        GameButton kupit;
+        GameLabel nazovHry, popis, vyvojar;
+        GamePanel hlavnyPanel;
+        GamePictureBox nahladHry;
         TransparentButton back, next;
 
         // objekty pre kniznicu
         List<Control> libHry = new List<Control> ();
-        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
-        PictureBox libObrazok;
+        libLabel kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
+        libPictureBox libObrazok;
+        libPanel libHra;
 
         // kontrola na ktorej stranke sme
         bool vHre = false;
         bool vKniznici = false;
 
 
-        bool closedForm = false;
+        
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -163,7 +165,7 @@ namespace Staem
 
                 //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                 //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                PictureBox picbox = new PictureBox
+                storePictureBox picbox = new storePictureBox
                 {
                     Image = Image.FromFile(path),
                     Location = new Point(110 + x, 85 + y),
@@ -172,7 +174,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                Panel panelCena = new Panel
+                storePanel panelCena = new storePanel
                 {
                     Location = new Point(110 + x, 285 + y),
                     Size = new Size(400, 35),
@@ -180,7 +182,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                Label cena = new Label
+                storeLabel cena = new storeLabel
                 {
                     Location = new Point(120 + x, 292 + y),
                     AutoSize = true,
@@ -255,7 +257,7 @@ namespace Staem
             int y = 0;
 
             // vypise ponuku vyberu hier podla kategorii
-            Label nazovKategorie = new Label
+            storeCategory nazovKategorie = new storeCategory
             {
                 Location = new Point(1510, 85),
                 AutoSize = true,
@@ -268,7 +270,7 @@ namespace Staem
 
             foreach (var categ in category)
             {
-                Label vyberKategoria = new Label
+                storeCategory vyberKategoria = new storeCategory
                 {
                     Location = new Point(1520, 125 + y),
                     AutoSize = true,
@@ -367,17 +369,7 @@ namespace Staem
             }
             Database.dbClose();
 
-            nemasHru = new Label
-            {
-                Location = new Point(310, 150),
-                AutoSize = true,
-                ForeColor = Color.White,
-                Text = "Momentálne nemáš žiadnu hru",
-                Font = new Font(font.Families[0], 15, FontStyle.Italic)
-            };
-
-            Controls.Add(nemasHru);
-            nemasHru.Visible = false;
+            
 
 
             getAmount();
@@ -402,11 +394,10 @@ namespace Staem
 
             foreach (Control co in this.Controls)
             {
-                co.Visible = false;
-                labelLib.Visible = true;
-                labelNick.Visible = true;
-                labelStore.Visible = true;
-                panel1.Visible = true;
+                if(co is storePanel || co is storeLabel || co is storePictureBox)
+                {
+                    co.Visible = false;
+                }
             }
 
             drawCategory();
@@ -421,7 +412,7 @@ namespace Staem
 
                     //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                     //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                    PictureBox picbox = new PictureBox
+                    storePictureBox picbox = new storePictureBox
                     {
                         Image = Image.FromFile(path),
                         Location = new Point(110 + x, 85 + y),
@@ -430,7 +421,7 @@ namespace Staem
                         Cursor = Cursors.Hand
                     };
 
-                    Panel panelCena = new Panel
+                    storePanel panelCena = new storePanel
                     {
                         Location = new Point(110 + x, 285 + y),
                         Size = new Size(400, 35),
@@ -438,7 +429,7 @@ namespace Staem
                         Cursor = Cursors.Hand
                     };
 
-                    Label cena = new Label
+                    storeLabel cena = new storeLabel
                     {
                         Location = new Point(120 + x, 292 + y),
                         AutoSize = true,
@@ -498,17 +489,17 @@ namespace Staem
             maxN = nahladoveObrazky.Count;
 
 
-            foreach (Control c in this.Controls)
+            foreach(Control control in Controls)
             {
-                c.Visible = false;
-                labelLib.Visible = true;
-                labelNick.Visible = true;
-                labelStore.Visible = true;
-                panel1.Visible = true;
+                if(control is storePictureBox || control is storePanel || control is storeLabel || control is storeCategory)
+                {
+                    control.Visible = false;
+                }
             }
+            
 
             //tieto veci pridavaju nove controls
-            hlavnyPanel = new Panel
+            hlavnyPanel = new GamePanel
             {
                 Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2) + 200, 150),
                 AutoSize = true,
@@ -517,7 +508,7 @@ namespace Staem
                 Cursor = Cursors.Default
             };
 
-            nazovHry = new Label
+            nazovHry = new GameLabel
             {
                 Location = new Point(100, 100),
                 AutoSize = true,
@@ -526,7 +517,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 20, FontStyle.Bold)
             };
 
-            vyvojar = new Label
+            vyvojar = new GameLabel
             {
                 Location = new Point(100, 120),
                 AutoSize = true,
@@ -535,7 +526,7 @@ namespace Staem
                 Font = new Font(font.Families[0], 15, FontStyle.Italic)
             };
 
-            nahladHry = new PictureBox
+            nahladHry = new GamePictureBox
             {
                 Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[0]),
                 Location = new Point(100, 150),
@@ -559,7 +550,7 @@ namespace Staem
             };
             // buttony na prepinanie nahladovych obrazkov
 
-            popis = new Label
+            popis = new GameLabel
             {
                 Location = new Point(20, 20),                
                 AutoSize = true,
@@ -572,7 +563,7 @@ namespace Staem
             Controls.Add(popis);
             Size labelSize = popis.GetPreferredSize(Size.Empty);
 
-            kupit = new Button
+            kupit = new GameButton
             {
                 AutoSize = true,
                 Location = new Point(700, labelSize.Height + 30),
@@ -614,8 +605,6 @@ namespace Staem
                     }
                 }
             }
-
-            vHre = true;
                 
         }
 
@@ -683,21 +672,34 @@ namespace Staem
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
-
-            foreach (Control control in Controls)
+            if (vKniznici)
             {
-                if (control is PictureBox || control is Panel || control is Label)
+                foreach (Control control in Controls)
                 {
-                    control.Visible = true;
+                    if (control is libPictureBox || control is libPanel || control is libLabel)
+                    {
+                        control.Dispose();
+                    }
+                    
                 }
 
-            }
+                foreach (var i in libHry)
+                {
+                    i.Dispose();
+                }
 
+                foreach (Control control in Controls)
+                {
+                    if (control is storeLabel || control is storePanel || control is storePictureBox)
+                    {
+                        control.Visible = true;
+                    }
+                }
 
-            foreach (var hra in libHry)
-            {
-                hra.Dispose();
+                
+                vKniznici = false;
             }
+                
 
             foreach (var i in klikCategory)
             {
@@ -718,12 +720,42 @@ namespace Staem
 
             //iba ak som hned predtym klikol na hru lebo kebyze idem z kniznice do obchodu tak sa disposuje nieco co je null takze to hadze error
             if (vHre)
-            {
-                hlavnyPanel.Dispose();
-                nazovHry.Dispose();
-                kupit.Dispose();
-                nahladHry.Dispose();
-                vyvojar.Dispose();
+            {              
+                foreach (Control control in Controls)
+                {
+                    if(control is GameButton || control is GameLabel || control is GamePanel || control is GamePictureBox)
+                    {
+                        control.Dispose();
+                        
+                    }
+                }
+
+                foreach (Control control in Controls)
+                {
+                    if (control is GameButton || control is GameLabel || control is GamePanel || control is GamePictureBox)
+                    {
+                        control.Dispose();
+
+                    }
+                }
+
+                foreach (Control control in Controls)
+                {
+                    if (control is GameButton || control is GameLabel || control is GamePanel || control is GamePictureBox)
+                    {
+                        control.Dispose();
+
+                    }
+                }
+
+                foreach(Control control in Controls)
+                {
+                    if(control is storeCategory || control is storeLabel || control is storePictureBox || control is storePanel)
+                    {
+                        control.Visible = true;
+                    }
+                }
+
                 vHre = false;
             }
         }
@@ -745,7 +777,7 @@ namespace Staem
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
-            kniznica = new Label
+            kniznica = new libLabel
             {
                 Location = new Point(310, 100),
                 AutoSize = true,
@@ -755,24 +787,31 @@ namespace Staem
             };
 
             
-
-            foreach (Control c in this.Controls)
+            foreach(Control c in Controls)
             {
-                c.Visible = false;
-                labelLib.Visible = true;
-                labelNick.Visible = true;
-                labelStore.Visible = true;
-                panel1.Visible = true;
-                pictureBox1.Visible = true;
+                if(c is storeLabel || c is storePanel || c is storePictureBox || c is storeCategory)
+                {
+                    c.Visible = false;
+                }
             }
+            
 
             if(hry == "")
             {
-                nemasHru.Visible = true;
+                nemasHru = new libLabel
+                {
+                    Location = new Point(310, 150),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Momentálne nemáš žiadnu hru",
+                    Font = new Font(font.Families[0], 15, FontStyle.Italic)
+                };
+
+               
             }
 
             Controls.Add(kniznica);
-            
+            Controls.Add(nemasHru);
 
 
             //do pola davam hry
@@ -803,14 +842,14 @@ namespace Staem
                 
 
                 //toto pridava panely do listu odkial ich potom vypisujem
-                libHry.Add(new Panel
+                libHry.Add(new libPanel
                 {
                     Location = new Point(310, 200 + y),
                     Size = new Size(840, 100),
                     BackColor = Color.FromArgb(57, 102, 132)
                 });
 
-                libObrazok = new PictureBox
+                libObrazok = new libPictureBox
                 {
                     Image = Image.FromFile(cesta),
                     Location = new Point(0, 0),
@@ -818,7 +857,7 @@ namespace Staem
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                libNazov = new Label
+                libNazov = new libLabel
                 {
                     Location = new Point(210, 20),
                     AutoSize = true,
@@ -827,7 +866,7 @@ namespace Staem
                     Font = new Font(font.Families[0], 14, FontStyle.Bold)
                 };
 
-                libKategoria = new Label
+                libKategoria = new libLabel
                 {
                     Location = new Point(210, 55),
                     AutoSize = true,
@@ -836,7 +875,7 @@ namespace Staem
                     Font = new Font(font.Families[0], 11, FontStyle.Italic)
                 };
 
-                libOdobrat = new Label
+                libOdobrat = new libLabel
                 {
                     Location = new Point(735, 20),
                     AutoSize = true,
@@ -846,7 +885,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                libHrat = new Label
+                libHrat = new libLabel
                 {
                     Location = new Point(759, 60),
                     AutoSize = true,
@@ -859,7 +898,7 @@ namespace Staem
                 y += 110;
 
                 //po kazdej iteracii pridam do controlsov panely => po dokonceni cyklu sa mi zobrazia vsetky panely
-                
+
                 libHry[counter].Controls.Add(libObrazok);
                 libHry[counter].Controls.Add(libNazov);
                 libHry[counter].Controls.Add(libKategoria);

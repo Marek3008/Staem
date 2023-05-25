@@ -69,8 +69,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Game\GameButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Game\GameLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Game\GamePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Game\GamePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Lib\libLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Store\storeCategory.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Store\storeLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Store\storePanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Store\storePictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Components\Lib\libPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\Lib\libPictureBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
