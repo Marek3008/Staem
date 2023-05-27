@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staem.Components
 {
-    internal class storePanel : Panel   
+    internal class StorePanel : Panel   
     {
     }
 }

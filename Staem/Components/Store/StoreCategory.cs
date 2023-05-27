@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staem.Components
 {
-    internal class storeCategory : Label
+    internal class StoreCategory : Label
     {
     }
 }

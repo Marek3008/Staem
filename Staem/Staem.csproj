@@ -81,27 +81,27 @@
     <Compile Include="Components\Game\GamePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Lib\libLabel.cs">
+    <Compile Include="Components\Lib\LibLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Store\storeCategory.cs">
+    <Compile Include="Components\Store\StoreCategory.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Store\storeLabel.cs">
+    <Compile Include="Components\Store\StoreLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Store\storePanel.cs">
+    <Compile Include="Components\Store\StorePanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Store\storePictureBox.cs">
+    <Compile Include="Components\Store\StorePictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Components\Lib\libPanel.cs">
+    <Compile Include="Components\Lib\LibPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Lib\libPictureBox.cs">
+    <Compile Include="Components\Lib\LibPictureBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="LoginForm.cs">

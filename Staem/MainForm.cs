@@ -43,9 +43,9 @@ namespace Staem
 
         // objekty pre kniznicu
         List<Control> libHry = new List<Control> ();
-        libLabel kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
-        libPictureBox libObrazok;
-        libPanel libHra;
+        LibLabel kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
+        LibPictureBox libObrazok;
+        LibPanel libHra;
 
         // kontrola na ktorej stranke sme
         bool vHre = false;
@@ -165,7 +165,7 @@ namespace Staem
 
                 //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                 //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                storePictureBox picbox = new storePictureBox
+                StorePictureBox picbox = new StorePictureBox
                 {
                     Image = Image.FromFile(path),
                     Location = new Point(110 + x, 85 + y),
@@ -174,7 +174,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                storePanel panelCena = new storePanel
+                StorePanel panelCena = new StorePanel
                 {
                     Location = new Point(110 + x, 285 + y),
                     Size = new Size(400, 35),
@@ -182,7 +182,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                storeLabel cena = new storeLabel
+                StoreLabel cena = new StoreLabel
                 {
                     Location = new Point(120 + x, 292 + y),
                     AutoSize = true,
@@ -257,7 +257,7 @@ namespace Staem
             int y = 0;
 
             // vypise ponuku vyberu hier podla kategorii
-            storeCategory nazovKategorie = new storeCategory
+            StoreCategory nazovKategorie = new StoreCategory
             {
                 Location = new Point(1510, 85),
                 AutoSize = true,
@@ -270,7 +270,7 @@ namespace Staem
 
             foreach (var categ in category)
             {
-                storeCategory vyberKategoria = new storeCategory
+                StoreCategory vyberKategoria = new StoreCategory
                 {
                     Location = new Point(1520, 125 + y),
                     AutoSize = true,
@@ -394,7 +394,7 @@ namespace Staem
 
             foreach (Control co in this.Controls)
             {
-                if(co is storePanel || co is storeLabel || co is storePictureBox)
+                if(co is StorePanel || co is StoreLabel || co is StorePictureBox)
                 {
                     co.Visible = false;
                 }
@@ -412,7 +412,7 @@ namespace Staem
 
                     //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                     //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                    storePictureBox picbox = new storePictureBox
+                    StorePictureBox picbox = new StorePictureBox
                     {
                         Image = Image.FromFile(path),
                         Location = new Point(110 + x, 85 + y),
@@ -421,7 +421,7 @@ namespace Staem
                         Cursor = Cursors.Hand
                     };
 
-                    storePanel panelCena = new storePanel
+                    StorePanel panelCena = new StorePanel
                     {
                         Location = new Point(110 + x, 285 + y),
                         Size = new Size(400, 35),
@@ -429,7 +429,7 @@ namespace Staem
                         Cursor = Cursors.Hand
                     };
 
-                    storeLabel cena = new storeLabel
+                    StoreLabel cena = new StoreLabel
                     {
                         Location = new Point(120 + x, 292 + y),
                         AutoSize = true,
@@ -491,7 +491,7 @@ namespace Staem
 
             foreach(Control control in Controls)
             {
-                if(control is storePictureBox || control is storePanel || control is storeLabel || control is storeCategory)
+                if(control is StorePictureBox || control is StorePanel || control is StoreLabel || control is StoreCategory)
                 {
                     control.Visible = false;
                 }
@@ -676,7 +676,7 @@ namespace Staem
             {
                 foreach (Control control in Controls)
                 {
-                    if (control is libPictureBox || control is libPanel || control is libLabel)
+                    if (control is LibPictureBox || control is LibPanel || control is LibLabel)
                     {
                         control.Dispose();
                     }
@@ -690,7 +690,7 @@ namespace Staem
 
                 foreach (Control control in Controls)
                 {
-                    if (control is storeLabel || control is storePanel || control is storePictureBox)
+                    if (control is StoreLabel || control is StorePanel || control is StorePictureBox)
                     {
                         control.Visible = true;
                     }
@@ -750,7 +750,7 @@ namespace Staem
 
                 foreach(Control control in Controls)
                 {
-                    if(control is storeCategory || control is storeLabel || control is storePictureBox || control is storePanel)
+                    if(control is StoreCategory || control is StoreLabel || control is StorePictureBox || control is StorePanel)
                     {
                         control.Visible = true;
                     }
@@ -777,7 +777,7 @@ namespace Staem
             //toto by malo vyprazdnit list ale bohvie ci funguje
             libHry.Clear();
 
-            kniznica = new libLabel
+            kniznica = new LibLabel
             {
                 Location = new Point(310, 100),
                 AutoSize = true,
@@ -789,7 +789,7 @@ namespace Staem
             
             foreach(Control c in Controls)
             {
-                if(c is storeLabel || c is storePanel || c is storePictureBox || c is storeCategory)
+                if(c is StoreLabel || c is StorePanel || c is StorePictureBox || c is StoreCategory)
                 {
                     c.Visible = false;
                 }
@@ -798,7 +798,7 @@ namespace Staem
 
             if(hry == "")
             {
-                nemasHru = new libLabel
+                nemasHru = new LibLabel
                 {
                     Location = new Point(310, 150),
                     AutoSize = true,
@@ -842,14 +842,14 @@ namespace Staem
                 
 
                 //toto pridava panely do listu odkial ich potom vypisujem
-                libHry.Add(new libPanel
+                libHry.Add(new LibPanel
                 {
                     Location = new Point(310, 200 + y),
                     Size = new Size(840, 100),
                     BackColor = Color.FromArgb(57, 102, 132)
                 });
 
-                libObrazok = new libPictureBox
+                libObrazok = new LibPictureBox
                 {
                     Image = Image.FromFile(cesta),
                     Location = new Point(0, 0),
@@ -857,7 +857,7 @@ namespace Staem
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                libNazov = new libLabel
+                libNazov = new LibLabel
                 {
                     Location = new Point(210, 20),
                     AutoSize = true,
@@ -866,7 +866,7 @@ namespace Staem
                     Font = new Font(font.Families[0], 14, FontStyle.Bold)
                 };
 
-                libKategoria = new libLabel
+                libKategoria = new LibLabel
                 {
                     Location = new Point(210, 55),
                     AutoSize = true,
@@ -875,7 +875,7 @@ namespace Staem
                     Font = new Font(font.Families[0], 11, FontStyle.Italic)
                 };
 
-                libOdobrat = new libLabel
+                libOdobrat = new LibLabel
                 {
                     Location = new Point(735, 20),
                     AutoSize = true,
@@ -885,7 +885,7 @@ namespace Staem
                     Cursor = Cursors.Hand
                 };
 
-                libHrat = new libLabel
+                libHrat = new LibLabel
                 {
                     Location = new Point(759, 60),
                     AutoSize = true,

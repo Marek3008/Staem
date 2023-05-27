@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staem.Components
 {
-    internal class storePictureBox : PictureBox
+    internal class StorePictureBox : PictureBox
     {
     }
 }

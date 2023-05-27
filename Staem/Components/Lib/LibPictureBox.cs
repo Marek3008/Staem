@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Staem
 {
-    internal class libPictureBox : PictureBox
+    internal class LibPictureBox : PictureBox
     {
     }
 }
