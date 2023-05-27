@@ -117,8 +117,6 @@ namespace Staem
             Database.dbClose();
         }
 
-        
-
         public void getGame()
         {
             //tento cyklus sa opakuje tolko krat kolko je pocet hier v tabulke
@@ -400,6 +398,9 @@ namespace Staem
                 }
             }
 
+            // z neznameho dovodu sa pri tejto funkcii vytvara label, ktory by sa nemal (netusim preco)
+            //kniznica.Dispose();
+
             drawCategory();
 
             foreach (var item in games)
@@ -466,6 +467,7 @@ namespace Staem
             kliknutaKategoria = "";
         }
 
+        // zobrazi informacie o hre
         private void picbox_Click(Game game)
         {
             vHre = true;
@@ -672,6 +674,23 @@ namespace Staem
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
+            if (!vKniznici)
+            {
+                if (kliknutaKategoria == "")
+                {
+                    foreach (Control control in Controls)
+                    {
+                        if (control is StoreCategory || control is StoreLabel || control is StorePictureBox || control is StorePanel)
+                        {
+                            control.Visible = false;
+                        }
+                    }
+
+                    drawGames();
+                    drawCategory();
+                }
+            }
+
             if (vKniznici)
             {
                 foreach (Control control in Controls)
@@ -680,7 +699,6 @@ namespace Staem
                     {
                         control.Dispose();
                     }
-                    
                 }
 
                 foreach (var i in libHry)
@@ -696,26 +714,13 @@ namespace Staem
                     }
                 }
 
-                
+                drawCategory();
                 vKniznici = false;
             }
-                
 
             foreach (var i in klikCategory)
             {
                 i.Dispose();
-            }
-
-            // vymazava vsetko co sa nachadza v kniznici
-            if (vKniznici)
-            {
-                if(hry == "")
-                {
-                    nemasHru.Visible = false;
-                }
-                    
-                kniznica.Dispose();                
-                vKniznici = false;
             }
 
             //iba ak som hned predtym klikol na hru lebo kebyze idem z kniznice do obchodu tak sa disposuje nieco co je null takze to hadze error
@@ -762,6 +767,23 @@ namespace Staem
 
         private void labelLib_Click(object sender, EventArgs e)
         {
+            foreach (Control c in Controls)
+            {
+                if (c is GameButton || c is GameLabel || c is GamePanel || c is GamePictureBox)
+                {
+                    c.Dispose();
+                }
+
+                if (c is GameButton || c is GameLabel || c is GamePanel || c is GamePictureBox)
+                {
+                    c.Dispose();
+                }
+
+                if (c is GameButton || c is GameLabel || c is GamePanel || c is GamePictureBox)
+                {
+                    c.Dispose();
+                }
+            }
 
             Database.dbConnect();
             MySqlCommand cmd2 = new MySqlCommand($"SELECT hry FROM Users WHERE email = '{user.Email}';", Database.connection);
@@ -794,7 +816,6 @@ namespace Staem
                     c.Visible = false;
                 }
             }
-            
 
             if(hry == "")
             {
@@ -807,11 +828,10 @@ namespace Staem
                     Font = new Font(font.Families[0], 15, FontStyle.Italic)
                 };
 
-               
+                Controls.Add(nemasHru);
             }
 
             Controls.Add(kniznica);
-            Controls.Add(nemasHru);
 
 
             //do pola davam hry
@@ -930,7 +950,6 @@ namespace Staem
             }
 
             //tohoto sa nechytat; labelLib_Click chcel pri zavolani nejake argumetny typu vid nizsie tak som ich tam dal
-
             labelLib_Click(new object(), new EventArgs());
         }
 
