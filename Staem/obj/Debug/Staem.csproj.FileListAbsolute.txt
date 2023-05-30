@@ -79,3 +79,4 @@ C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.CoreCompile
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.CopyComplete
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.exe
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.pdb
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
