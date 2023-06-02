@@ -1,5 +1,4 @@
 ﻿using MySqlConnector;
-using Staem.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using Image = System.Drawing.Image;
+
 
 namespace Staem.Forms
 {
@@ -21,13 +19,13 @@ namespace Staem.Forms
     {
         User user;
         private int amount;
-        List<Game> games = new List<Game>();
+        public static List<Game> games = new List<Game>();
         List<string> category = new List<string>();
         // kategoria
         string kliknutaKategoria = "";
         List<Label> klikCategory = new List<Label>();
-        GameButton kupit;
-        GamePictureBox nahladHry;
+        Button kupit;
+        PictureBox nahladHry;
 
         string[] poleHier;
 
@@ -40,7 +38,7 @@ namespace Staem.Forms
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
-        
+
 
         //ziskava absolutnu cestu ku suboru
         string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
@@ -50,8 +48,8 @@ namespace Staem.Forms
         {
             InitializeComponent();
 
-            this.AutoSize = true;
-            this.BackColor = Color.Yellow;
+            this.AutoScroll = true;
+            this.AutoScaleMode = AutoScaleMode.None;
 
             font.AddFontFile(fontPath);
 
@@ -61,6 +59,7 @@ namespace Staem.Forms
             }
 
             this.user = user;
+
             getAmount();
             getGame();
             drawGames();
@@ -137,16 +136,16 @@ namespace Staem.Forms
 
                 //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                 //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                StorePictureBox picbox = new StorePictureBox
+                PictureBox picbox = new PictureBox
                 {
                     Image = System.Drawing.Image.FromFile(path),
-                    Location = new Point(110 + x, 5 + y),
+                    Location = new Point(110 + x, 85 + y),
                     Size = new Size(400, 200),
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     Cursor = Cursors.Hand
                 };
 
-                StorePanel panelCena = new StorePanel
+                Panel panelCena = new Panel
                 {
                     Location = new Point(110 + x, 285 + y),
                     Size = new Size(400, 35),
@@ -154,7 +153,7 @@ namespace Staem.Forms
                     Cursor = Cursors.Hand
                 };
 
-                StoreLabel cena = new StoreLabel
+                Label cena = new Label
                 {
                     Location = new Point(120 + x, 292 + y),
                     AutoSize = true,
@@ -229,7 +228,7 @@ namespace Staem.Forms
             int y = 0;
 
             // vypise ponuku vyberu hier podla kategorii
-            StoreCategory nazovKategorie = new StoreCategory
+            Label nazovKategorie = new Label
             {
                 Location = new Point(1510, 85),
                 AutoSize = true,
@@ -242,7 +241,7 @@ namespace Staem.Forms
 
             foreach (var categ in category)
             {
-                StoreCategory vyberKategoria = new StoreCategory
+                Label vyberKategoria = new Label
                 {
                     Location = new Point(1520, 125 + y),
                     AutoSize = true,
@@ -271,7 +270,24 @@ namespace Staem.Forms
 
         private void picbox_Click(Game game)
         {
-            vHre = true;
+            foreach(Control control in Controls)
+            {
+                control.Visible = false;
+            }
+
+            GameForm gameForm = new GameForm(game, user);
+
+            gameForm.TopLevel = false;
+            gameForm.FormBorderStyle = FormBorderStyle.None;
+            gameForm.Location = new Point(0, 50);
+            gameForm.Width = this.Width - 17;
+            gameForm.Height = this.Height - 100;
+
+            Controls.Add(gameForm);
+            gameForm.Show();
+
+
+            /*         
             currentN = 0;
 
             // nacita nahladove obrazky do listu (ked som to skusal v metode tak pisalo chybu ArgumentOutOfRangeException, ale neviem preco)
@@ -291,14 +307,6 @@ namespace Staem.Forms
             temp = "";
             maxN = nahladoveObrazky.Count;
 
-
-            foreach (Control control in Controls)
-            {
-                if (control is StorePictureBox || control is StorePanel || control is StoreLabel || control is StoreCategory)
-                {
-                    control.Visible = false;
-                }
-            }
 
 
             //tieto veci pridavaju nove controls
@@ -329,7 +337,7 @@ namespace Staem.Forms
                 Font = new Font(font.Families[0], 15, FontStyle.Italic)
             };
 
-            PictureBox nahladHry = new GamePictureBox
+            PictureBox nahladHry = new PictureBox
             {
                 Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[0]),
                 Location = new Point(100, 150),
@@ -366,7 +374,7 @@ namespace Staem.Forms
             Controls.Add(popis);
             Size labelSize = popis.GetPreferredSize(Size.Empty);
 
-            Button kupit = new GameButton
+            Button kupit = new Button
             {
                 AutoSize = true,
                 Location = new Point(700, labelSize.Height + 30),
@@ -407,7 +415,7 @@ namespace Staem.Forms
                         kupit.Enabled = false;
                     }
                 }
-            }
+            }*/
 
         }
 
@@ -419,7 +427,7 @@ namespace Staem.Forms
 
             foreach (Control co in this.Controls)
             {
-                if (co is StorePanel || co is StoreLabel || co is StorePictureBox)
+                if (co is Panel || co is Label || co is PictureBox)
                 {
                     co.Visible = false;
                 }
@@ -440,7 +448,7 @@ namespace Staem.Forms
 
                     //pocas kazdej iteracie cyklu vytvarame novy picturebox (nacitavame obrazok, nastavujeme poziciu a velkost a to ako sa ma obrazok v pictureboxe spravat)
                     //x-ova suradnica sa zvacsuje o nejaku hodnotu aby boli pictureboxy pekne od seba oddelene -> vdaka premennej a ktora sa po kazdej iteracii zvacsi o 300
-                    StorePictureBox picbox = new StorePictureBox
+                    PictureBox picbox = new PictureBox
                     {
                         Image = Image.FromFile(path),
                         Location = new Point(110 + x, 85 + y),
@@ -449,7 +457,7 @@ namespace Staem.Forms
                         Cursor = Cursors.Hand
                     };
 
-                    StorePanel panelCena = new StorePanel
+                    Panel panelCena = new Panel
                     {
                         Location = new Point(110 + x, 285 + y),
                         Size = new Size(400, 35),
@@ -457,7 +465,7 @@ namespace Staem.Forms
                         Cursor = Cursors.Hand
                     };
 
-                    StoreLabel cena = new StoreLabel
+                    Label cena = new Label
                     {
                         Location = new Point(120 + x, 292 + y),
                         AutoSize = true,

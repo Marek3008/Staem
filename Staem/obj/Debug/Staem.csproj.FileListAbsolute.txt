@@ -80,3 +80,5 @@ C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.CopyComplet
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.exe
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.pdb
 C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.LibForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.GameForm.resources

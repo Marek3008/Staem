@@ -69,33 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\Game\GameButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Game\GameLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Game\GamePanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Game\GamePictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Lib\LibLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Store\StoreCategory.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Store\StoreLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Store\StorePanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Store\StorePictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="Forms\GameForm.cs">
       <SubType>Form</SubType>
@@ -116,12 +89,6 @@
       <DependentUpon>StoreForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
-    <Compile Include="Components\Lib\LibPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Components\Lib\LibPictureBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +107,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="Forms\GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LibForm.resx">
+      <DependentUpon>LibForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StoreForm.resx">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </EmbeddedResource>

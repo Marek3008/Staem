@@ -12,9 +12,28 @@ namespace Staem.Forms
 {
     public partial class GameForm : Form
     {
-        public GameForm()
+        Game game;
+        User user;
+
+        public GameForm(Game game, User user)
         {
             InitializeComponent();
+
+            this.game = game;   
+            this.user = user;
+
+            this.AutoScaleMode = AutoScaleMode.None;
+
+            Label ahoj = new Label
+            {
+                Location = new Point(100, 120),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = game.Developer,
+                Font = new Font("Arial", 15, FontStyle.Italic)
+            };
+
+            Controls.Add(ahoj);
         }
     }
 }

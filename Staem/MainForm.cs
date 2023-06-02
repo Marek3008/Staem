@@ -14,7 +14,6 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Diagnostics.Metrics;
 using System.Net.Http.Headers;
-using Staem.Components;
 using Staem.Forms;
 
 namespace Staem
@@ -22,32 +21,28 @@ namespace Staem
     public partial class MainForm : Form
     {
         private User user;
-        
-        
-        
-        
-        
-        
-        
-        
+
+        public static StoreForm storeForm;
+        LibForm libForm;
 
         // objekty pre popis a kupu hry
-        
-        GameLabel nazovHry, popis, vyvojar;
-        GamePanel hlavnyPanel;
+        /*
+        Label nazovHry, popis, vyvojar;
+        Panel hlavnyPanel;
         
         TransparentButton back, next;
 
         // objekty pre kniznicu
-        List<Control> libHry = new List<Control> ();
-        LibLabel kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
-        LibPictureBox libObrazok;
-        LibPanel libHra;
+        
+        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
+        PictureBox libObrazok;
+        Panel libHra;
 
         // kontrola na ktorej stranke sme
         
-        bool vKniznici = false;
+        bool vKniznici = false;*/
 
+        List<Control> libHry = new List<Control>();
 
         PrivateFontCollection font = new PrivateFontCollection();
 
@@ -66,21 +61,16 @@ namespace Staem
             this.user = user;
             
             labelNick.Text = (user.checkedUserID).ToUpper();
+                     
 
-            mainpanel.Size = new Size(this.Width, this.Height);
-            mainpanel.AutoSize = true;
-
-            StoreForm storeForm = new StoreForm(user);
+            storeForm = new StoreForm(user);
             storeForm.TopLevel = false;
-            storeForm.Dock = DockStyle.Fill;
             storeForm.FormBorderStyle = FormBorderStyle.None;
-            storeForm.TopMost = true;
-            storeForm.Size = new Size(mainpanel.Width, mainpanel.Height);
-            storeForm.AutoScroll = true;
-
-
-
-            mainpanel.Controls.Add(storeForm);
+            storeForm.Location = new Point(0, 50);
+            storeForm.Width = this.Width - 17;
+            storeForm.Height = this.Height - 100;
+            
+            Controls.Add(storeForm);
             
             storeForm.Show();
         }
@@ -188,12 +178,6 @@ namespace Staem
 
         
 
-        // zobrazi informacie o hre
-        
-
-        
-
-
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Application.Restart();
@@ -204,12 +188,23 @@ namespace Staem
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
-
+            libForm.Close();
+            storeForm.Show();
         }
 
         private void labelLib_Click(object sender, EventArgs e)
         {
-            
+            storeForm.Hide();
+
+            libForm = new LibForm(user);
+            libForm.TopLevel = false;
+            libForm.FormBorderStyle = FormBorderStyle.None;
+            libForm.Location = new Point(0, 50);
+            libForm.Width = this.Width - 17;
+            libForm.Height = this.Height - 100;
+
+            Controls.Add(libForm);
+            libForm.Show();
         }
 
         private void libOdobrat_Click(string hra)
@@ -231,10 +226,7 @@ namespace Staem
             labelLib_Click(new object(), new EventArgs());
         }
 
-        private void libHrat_Click(string hra)
-        {
-            MessageBox.Show($"Teraz hráš {hra}");
-        }
+        
 
         private void labelPanel_hover(object sender, EventArgs e)
         {

@@ -37,7 +37,6 @@ namespace Staem
             this.labelStore = new System.Windows.Forms.Label();
             this.labelNick = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.mainpanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,13 +105,6 @@ namespace Staem
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // mainpanel
-            // 
-            this.mainpanel.Location = new System.Drawing.Point(0, 50);
-            this.mainpanel.Name = "mainpanel";
-            this.mainpanel.Size = new System.Drawing.Size(1908, 989);
-            this.mainpanel.TabIndex = 5;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,7 +112,6 @@ namespace Staem
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1904, 1058);
-            this.Controls.Add(this.mainpanel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
@@ -147,6 +138,5 @@ namespace Staem
         private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.Label labelNick;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel mainpanel;
     }
 }
