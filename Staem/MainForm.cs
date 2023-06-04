@@ -24,6 +24,7 @@ namespace Staem
 
         public static StoreForm storeForm;
         LibForm libForm;
+        public static GameForm gameForm;
 
         // objekty pre popis a kupu hry
         /*
@@ -189,12 +190,23 @@ namespace Staem
         private void labelStore_Click(object sender, EventArgs e)
         {
             libForm.Close();
+
+            if (storeForm.Controls["gameForm"] != null)
+            {
+                storeForm.Controls.
+            }
+
             storeForm.Show();
         }
 
         private void labelLib_Click(object sender, EventArgs e)
         {
             storeForm.Hide();
+
+            foreach (Form c in storeForm.Controls.OfType<GameForm>())
+            {
+                c.Close();
+            }
 
             libForm = new LibForm(user);
             libForm.TopLevel = false;

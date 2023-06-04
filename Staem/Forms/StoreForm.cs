@@ -27,14 +27,7 @@ namespace Staem.Forms
         Button kupit;
         PictureBox nahladHry;
 
-        string[] poleHier;
-
-        bool vHre = false;
-
-        int currentN = 0;
-        int maxN = 0;
-
-        string hry, temp;
+    
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -502,59 +495,8 @@ namespace Staem.Forms
             kliknutaKategoria = "";
         }
 
-        private void next_Click(List<string> nahladoveObrazky)
-        {
-            currentN++;
+        
 
-            if (currentN > 1)
-            {
-                currentN = 1;
-            }
-            else if (currentN < maxN)
-            {
-                nahladHry.Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]);
-            }
-        }
-
-        private void back_Click(List<string> nahladoveObrazky)
-        {
-            currentN--;
-
-            if (currentN < 0)
-            {
-                currentN = 0;
-            }
-            else if (currentN < maxN)
-            {
-                nahladHry.Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[currentN]);
-            }
-        }
-
-        private void kupit_Click(Game game)
-        {
-            //vdaka tomuto pridavam do databazy hry
-            hry += $"{game.Name};";
-
-            Database.dbConnect();
-            MySqlCommand cmd1 = new MySqlCommand($"UPDATE Users SET hry = '{hry}' WHERE email = '{user.Email}';", Database.connection);
-            cmd1.ExecuteNonQuery();
-            Database.dbClose();
-
-
-            //toto kontroluje ci je hra zakupena (mohlo to byt aj vo funkcii ale vzhladom na error ktory neviem pochopit to tam byt nemoze)
-            poleHier = hry.Split(';');
-
-            if (poleHier != null)
-            {
-                foreach (string item in poleHier)
-                {
-                    if (item == game.Name)
-                    {
-                        kupit.Enabled = false;
-                    }
-                }
-            }
-
-        }
+        
     }
 }
