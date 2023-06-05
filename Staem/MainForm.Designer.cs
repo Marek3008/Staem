@@ -31,12 +31,15 @@ namespace Staem
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.labelLib = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelStore = new System.Windows.Forms.Label();
             this.labelNick = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.mainCena_label = new System.Windows.Forms.Label();
+            this.peniazeTick = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,6 +108,25 @@ namespace Staem
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // mainCena_label
+            // 
+            this.mainCena_label.AutoSize = true;
+            this.mainCena_label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(62)))), ((int)(((byte)(85)))));
+            this.mainCena_label.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mainCena_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.mainCena_label.ForeColor = System.Drawing.Color.Aqua;
+            this.mainCena_label.Location = new System.Drawing.Point(1511, 12);
+            this.mainCena_label.Name = "mainCena_label";
+            this.mainCena_label.Size = new System.Drawing.Size(60, 24);
+            this.mainCena_label.TabIndex = 5;
+            this.mainCena_label.Text = "0,00 €";
+            this.mainCena_label.Click += new System.EventHandler(this.mainCena_label_Click);
+            // 
+            // peniazeTick
+            // 
+            this.peniazeTick.Enabled = true;
+            this.peniazeTick.Tick += new System.EventHandler(this.peniazeTick_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -112,6 +134,7 @@ namespace Staem
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(40)))), ((int)(((byte)(57)))));
             this.ClientSize = new System.Drawing.Size(1904, 1058);
+            this.Controls.Add(this.mainCena_label);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelNick);
             this.Controls.Add(this.labelStore);
@@ -138,5 +161,7 @@ namespace Staem
         private System.Windows.Forms.Label labelStore;
         private System.Windows.Forms.Label labelNick;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label mainCena_label;
+        private System.Windows.Forms.Timer peniazeTick;
     }
 }

@@ -70,6 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="Forms\AddFunds.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Forms\GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +110,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="Forms\AddFunds.resx">
+      <DependentUpon>AddFunds.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>

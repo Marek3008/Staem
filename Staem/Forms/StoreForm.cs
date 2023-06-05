@@ -27,15 +27,11 @@ namespace Staem.Forms
         Button kupit;
         PictureBox nahladHry;
 
-    
-
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
 
-
         //ziskava absolutnu cestu ku suboru
         string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
-
 
         public StoreForm(User user)
         {

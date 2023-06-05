@@ -24,7 +24,10 @@ namespace Staem
 
         public static StoreForm storeForm;
         LibForm libForm;
+        AddFunds peniazky;
         public static GameForm gameForm;
+
+        bool vLib = false, vGame = false, vStore = true, vPeniazky = false;
 
         // objekty pre popis a kupu hry
         /*
@@ -58,11 +61,13 @@ namespace Staem
         public MainForm(User user)
         {
             InitializeComponent();
-            
+
             this.user = user;
-            
+
             labelNick.Text = (user.checkedUserID).ToUpper();
-                     
+
+            peniazeLoad();
+
 
             storeForm = new StoreForm(user);
             storeForm.TopLevel = false;
@@ -70,9 +75,9 @@ namespace Staem
             storeForm.Location = new Point(0, 50);
             storeForm.Width = this.Width - 17;
             storeForm.Height = this.Height - 100;
-            
+
             Controls.Add(storeForm);
-            
+
             storeForm.Show();
         }
 
@@ -99,11 +104,26 @@ namespace Staem
         //"""""""""""""""""""""""""""""""""""""""""""""""""              METODY         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+        public void peniazeLoad()
+        {
+            string temp = "";
+            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users;", Database.connection);
 
-        
+            Database.dbConnect();
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                temp = reader["balance"].ToString();
+            }
+            Database.dbClose();
+
+            mainCena_label.Text = $"{temp} €";
+        }
+
 
         //tato metoda zisti pocet hier v tabulke podla ID
-        
+
 
 
         //"""""""""""""""""""""""""""""""""""""""""""""""""              METODY         """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,7 +174,7 @@ namespace Staem
             this.WindowState = FormWindowState.Maximized;
             this.Width = Screen.PrimaryScreen.Bounds.Width;
 
-            
+
 
             //pridavam font do mojej kolekcie
             font.AddFontFile(fontPath);
@@ -169,7 +189,7 @@ namespace Staem
             labelStore.Font = new Font(font.Families[0], 16, FontStyle.Bold);
             labelNick.Font = new Font(font.Families[0], 16, FontStyle.Bold);
 
-           
+
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -177,24 +197,35 @@ namespace Staem
             Application.Exit();
         }
 
-        
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
 
-        
+
 
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
-            libForm.Close();
-
-            if (storeForm.Controls["gameForm"] != null)
+            if (vLib)
             {
-                storeForm.Controls.
+                libForm.Close();
+                vLib = false;
             }
+            vStore = true;
+
+            foreach (Form c in storeForm.Controls.OfType<GameForm>())
+            {
+                c.Close();
+            }
+
+            /*if (storeForm.Controls["gameForm"] != null)
+            {
+                storeForm.Controls.Clear();
+                return;
+            }*/
 
             storeForm.Show();
         }
@@ -202,6 +233,16 @@ namespace Staem
         private void labelLib_Click(object sender, EventArgs e)
         {
             storeForm.Hide();
+
+            if (vPeniazky)
+            {
+                peniazky.Close();
+                vPeniazky = false;
+            }
+             
+
+            vStore = false;
+            vLib = true;
 
             foreach (Form c in storeForm.Controls.OfType<GameForm>())
             {
@@ -238,7 +279,44 @@ namespace Staem
             labelLib_Click(new object(), new EventArgs());
         }
 
-        
+        private void mainCena_label_Click(object sender, EventArgs e)
+        {
+            vPeniazky = true;
+            if (vLib)
+            {
+                libForm.Close();
+                vLib = false;
+            }
+
+            if (vStore)
+            {
+                storeForm.Hide();
+                vStore = false;
+            }
+            /*
+            foreach (Form c in storeForm.Controls.OfType<GameForm>())
+            {
+                c.Close();
+            }*/
+
+            peniazky = new AddFunds();
+            peniazky.TopLevel = false;
+            peniazky.FormBorderStyle = FormBorderStyle.None;
+            peniazky.Location = new Point(0, 50);
+            peniazky.Width = this.Width - 17;
+            peniazky.Height = this.Height - 100;
+
+            Controls.Add(peniazky);
+
+            peniazky.Show();
+
+            
+        }
+
+        private void peniazeTick_Tick(object sender, EventArgs e)
+        {
+            peniazeLoad();
+        }
 
         private void labelPanel_hover(object sender, EventArgs e)
         {

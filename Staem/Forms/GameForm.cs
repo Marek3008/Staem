@@ -71,7 +71,7 @@ namespace Staem.Forms
             //tieto veci pridavaju nove controls
             Panel hlavnyPanel = new Panel
             {
-                Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2) + 200, 150),
+                Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2) + 200, 100),
                 AutoSize = true,
                 MaximumSize = new Size(840, 0),
                 BackColor = Color.FromArgb(103, 103, 178),
@@ -80,7 +80,7 @@ namespace Staem.Forms
 
             Label nazovHry = new Label
             {
-                Location = new Point(100, 100),
+                Location = new Point(100, 50),
                 AutoSize = true,
                 ForeColor = Color.White,
                 Text = game.Name,
@@ -99,7 +99,7 @@ namespace Staem.Forms
             nahladHry = new PictureBox
             {
                 Image = Image.FromFile("obrazky/nahlady/" + nahladoveObrazky[0]),
-                Location = new Point(100, 150),
+                Location = new Point(100, 100),
                 Size = new Size(600, 300),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };

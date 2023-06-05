@@ -16,7 +16,7 @@ namespace Staem.Forms
     public partial class LibForm : Form
     {
         User user;
-        List<Game> hry = StoreForm.games;
+        //List<Game> hry = StoreForm.games; -------------- podla mna to tu netreba
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
