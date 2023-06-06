@@ -18,14 +18,15 @@ namespace Staem.Forms
     public partial class StoreForm : Form
     {
         User user;
+        MainForm mainForm;
+
         private int amount;
         public static List<Game> games = new List<Game>();
         List<string> category = new List<string>();
         // kategoria
-        string kliknutaKategoria = "";
+        public string kliknutaKategoria = "";
         List<Label> klikCategory = new List<Label>();
-        Button kupit;
-        PictureBox nahladHry;
+
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -33,7 +34,7 @@ namespace Staem.Forms
         //ziskava absolutnu cestu ku suboru
         string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
 
-        public StoreForm(User user)
+        public StoreForm(User user, MainForm mainForm)
         {
             InitializeComponent();
 
@@ -48,6 +49,7 @@ namespace Staem.Forms
             }
 
             this.user = user;
+            this.mainForm = mainForm;
 
             getAmount();
             getGame();
@@ -259,20 +261,17 @@ namespace Staem.Forms
 
         private void picbox_Click(Game game)
         {
-            foreach(Control control in Controls)
-            {
-                control.Visible = false;
-            }
+            this.Visible = false;
 
             GameForm gameForm = new GameForm(game, user);
 
             gameForm.TopLevel = false;
             gameForm.FormBorderStyle = FormBorderStyle.None;
             gameForm.Location = new Point(0, 50);
-            gameForm.Width = this.Width - 17;
-            gameForm.Height = this.Height - 100;
+            gameForm.Width = mainForm.Width - 17;
+            gameForm.Height = mainForm.Height - 100;
 
-            Controls.Add(gameForm);
+            mainForm.Controls.Add(gameForm);
             gameForm.Show();
 
 

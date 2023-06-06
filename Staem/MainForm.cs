@@ -25,7 +25,7 @@ namespace Staem
         public static StoreForm storeForm;
         LibForm libForm;
         AddFunds peniazky;
-        public static GameForm gameForm;
+        GameForm gameForm;
 
         bool vLib = false, vGame = false, vStore = true, vPeniazky = false;
 
@@ -69,7 +69,7 @@ namespace Staem
             peniazeLoad();
 
 
-            storeForm = new StoreForm(user);
+            storeForm = new StoreForm(user, this);
             storeForm.TopLevel = false;
             storeForm.FormBorderStyle = FormBorderStyle.None;
             storeForm.Location = new Point(0, 50);
@@ -209,23 +209,12 @@ namespace Staem
         // ODPAD PROSTE
         private void labelStore_Click(object sender, EventArgs e)
         {
-            if (vLib)
-            {
-                libForm.Close();
-                vLib = false;
-            }
-            vStore = true;
 
-            foreach (Form c in storeForm.Controls.OfType<GameForm>())
+            if(this.Controls.Count > 7)
             {
-                c.Close();
-            }
-
-            /*if (storeForm.Controls["gameForm"] != null)
-            {
-                storeForm.Controls.Clear();
-                return;
-            }*/
+                this.Controls.RemoveAt(Controls.Count - 1);
+            }           
+            
 
             storeForm.Show();
         }
@@ -234,29 +223,23 @@ namespace Staem
         {
             storeForm.Hide();
 
-            if (vPeniazky)
+            libForm = new LibForm(user)
             {
-                peniazky.Close();
-                vPeniazky = false;
-            }
-             
-
-            vStore = false;
-            vLib = true;
-
-            foreach (Form c in storeForm.Controls.OfType<GameForm>())
-            {
-                c.Close();
-            }
-
-            libForm = new LibForm(user);
-            libForm.TopLevel = false;
-            libForm.FormBorderStyle = FormBorderStyle.None;
-            libForm.Location = new Point(0, 50);
-            libForm.Width = this.Width - 17;
-            libForm.Height = this.Height - 100;
+                TopLevel = false,
+                FormBorderStyle = FormBorderStyle.None,
+                Location = new Point(0, 50),
+                Width = this.Width - 17,
+                Height = this.Height - 100
+            };
 
             Controls.Add(libForm);
+            
+            //nechytat sa
+            if (this.Controls.Count > 8)
+            {
+                Controls.RemoveAt(Controls.Count - 2);
+            }
+
             libForm.Show();
         }
 
@@ -281,23 +264,12 @@ namespace Staem
 
         private void mainCena_label_Click(object sender, EventArgs e)
         {
-            vPeniazky = true;
-            if (vLib)
-            {
-                libForm.Close();
-                vLib = false;
-            }
+            storeForm.Hide();
 
-            if (vStore)
+            if(this.Controls.Count > 7)
             {
-                storeForm.Hide();
-                vStore = false;
-            }
-            /*
-            foreach (Form c in storeForm.Controls.OfType<GameForm>())
-            {
-                c.Close();
-            }*/
+                this.Controls.RemoveAt(Controls.Count - 1);
+            } 
 
             peniazky = new AddFunds();
             peniazky.TopLevel = false;
