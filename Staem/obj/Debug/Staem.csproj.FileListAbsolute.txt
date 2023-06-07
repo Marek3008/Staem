@@ -52,6 +52,10 @@ C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Ma
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.LoginForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.MainForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\Staem\obj\Debug\Staem.csproj.SuggestedBindingRedirects.cache
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.LibForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.GameForm.resources
+C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.AddFunds.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\bin\Debug\Staem.exe.config
 C:\Users\Marek\Documents\code\app\staem\Staem\bin\Debug\Staem.exe
 C:\Users\Marek\Documents\code\app\staem\Staem\bin\Debug\Staem.pdb
@@ -71,6 +75,10 @@ C:\Users\Marek\Documents\code\app\staem\Staem\bin\Debug\System.Runtime.CompilerS
 C:\Users\Marek\Documents\code\app\staem\Staem\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.AssemblyReference.cache
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.SuggestedBindingRedirects.cache
+C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.AddFunds.resources
+C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.GameForm.resources
+C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.LibForm.resources
+C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.LoginForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.MainForm.resources
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Properties.Resources.resources
@@ -79,11 +87,3 @@ C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.CoreCompile
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.csproj.CopyComplete
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.exe
 C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.pdb
-C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
-C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.LibForm.resources
-C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.GameForm.resources
-C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.GameForm.resources
-C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.LibForm.resources
-C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.StoreForm.resources
-C:\Users\Marek\Documents\code\app\staem\Staem\obj\Debug\Staem.Forms.AddFunds.resources
-C:\Users\PC1\Documents\Marek\Coding\C, C++\CSharp\Staem\Staem\obj\Debug\Staem.Forms.AddFunds.resources

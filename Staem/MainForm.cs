@@ -107,7 +107,7 @@ namespace Staem
         public void peniazeLoad()
         {
             string temp = "";
-            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users;", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
 
             Database.dbConnect();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -215,7 +215,7 @@ namespace Staem
                 this.Controls.RemoveAt(Controls.Count - 1);
             }           
             
-
+            storeForm.klikCategory.Clear();
             storeForm.Show();
         }
 
@@ -243,24 +243,7 @@ namespace Staem
             libForm.Show();
         }
 
-        private void libOdobrat_Click(string hra)
-        {
-            Database.dbConnect();
-
-            //tento command odobera z databazy hry
-            MySqlCommand cmd = new MySqlCommand($"UPDATE Users SET hry = REPLACE(hry, '{hra};', '') WHERE email = '{user.Email}';", Database.connection);
-            cmd.ExecuteNonQuery();
-
-            Database.dbClose();
-
-            foreach(var item in libHry)
-            {
-                item.Dispose();
-            }
-
-            //tohoto sa nechytat; labelLib_Click chcel pri zavolani nejake argumetny typu vid nizsie tak som ich tam dal
-            labelLib_Click(new object(), new EventArgs());
-        }
+        
 
         private void mainCena_label_Click(object sender, EventArgs e)
         {
@@ -271,7 +254,7 @@ namespace Staem
                 this.Controls.RemoveAt(Controls.Count - 1);
             } 
 
-            peniazky = new AddFunds();
+            peniazky = new AddFunds(user);
             peniazky.TopLevel = false;
             peniazky.FormBorderStyle = FormBorderStyle.None;
             peniazky.Location = new Point(0, 50);

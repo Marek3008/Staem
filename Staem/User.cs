@@ -27,6 +27,7 @@ namespace Staem
             get; set;
         }
 
+
         //tu sa zapisu hodnoty ktore najdeme v databaze ak ich najdeme; pouziva sa na kontrolovanie duplikovanych pouzivatelov
         public string checkedEmail;
         public string checkedUserID;

@@ -19,14 +19,18 @@ namespace Staem.Forms
         float[] eura = { 5, 10, 25, 50, 100 };
         int y = 0;
 
+        User user;
+
         PrivateFontCollection font = new PrivateFontCollection();
         //ziskava absolutnu cestu ku suboru
         string fontPath = Path.GetFullPath("BrunoAceSC.ttf");
 
-        public AddFunds()
+        public AddFunds(User user)
         {
             InitializeComponent();
             font.AddFontFile(fontPath);
+
+            this.user = user;
 
             Label addFunds = new Label
             {
@@ -83,7 +87,7 @@ namespace Staem.Forms
             float num;
             string temp = "";
 
-            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users;", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
 
             Database.dbConnect();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -96,11 +100,11 @@ namespace Staem.Forms
 
             num = float.Parse(temp);
             num += i;
-            temp = num.ToString();
+            //temp = num.ToString();
 
 
             Database.dbConnect();
-            MySqlCommand cmd2 = new MySqlCommand($"UPDATE Users SET balance = {temp}", Database.connection);
+            MySqlCommand cmd2 = new MySqlCommand($"UPDATE Users SET balance = {num} WHERE email='{user.Email}'", Database.connection);
             cmd2.ExecuteNonQuery();
 
             Database.dbClose();

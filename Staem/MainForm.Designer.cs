@@ -115,7 +115,7 @@ namespace Staem
             this.mainCena_label.Cursor = System.Windows.Forms.Cursors.Hand;
             this.mainCena_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.mainCena_label.ForeColor = System.Drawing.Color.Aqua;
-            this.mainCena_label.Location = new System.Drawing.Point(1511, 12);
+            this.mainCena_label.Location = new System.Drawing.Point(1500, 12);
             this.mainCena_label.Name = "mainCena_label";
             this.mainCena_label.Size = new System.Drawing.Size(60, 24);
             this.mainCena_label.TabIndex = 5;
@@ -125,6 +125,7 @@ namespace Staem
             // peniazeTick
             // 
             this.peniazeTick.Enabled = true;
+            this.peniazeTick.Interval = 500;
             this.peniazeTick.Tick += new System.EventHandler(this.peniazeTick_Tick);
             // 
             // MainForm

@@ -21,7 +21,7 @@ namespace Staem.Forms
         int currentN = 0, maxN = 0;
         string temp, hry;
 
-        string[] poleHier;
+        List<string> poleHier = new List<string>();
 
         PictureBox nahladHry;
         Button kupit;
@@ -160,14 +160,25 @@ namespace Staem.Forms
             hlavnyPanel.Controls.Add(popis);
 
             Controls.Add(nahladHry);
-            Controls.Add(hlavnyPanel);          
+            Controls.Add(hlavnyPanel);
+
             
+            MySqlCommand cmd1 = new MySqlCommand($"SELECT hry FROM Users WHERE email = '{user.Email}';", Database.connection);
+            Database.dbConnect();
+            MySqlDataReader reader1 = cmd1.ExecuteReader();
+
+            while (reader1.Read())
+            {
+                hry = reader1["hry"].ToString();
+            }
+            Database.dbClose();
+
+            poleHier = hry.Split(';').ToList();
+
+            poleHier.RemoveAt(poleHier.Count - 1);
 
             if (poleHier != null)
-            {
-                //toto kontroluje ci je hra zakupena (mohlo to byt aj vo funkcii ale vzhladom na error ktory neviem pochopit to tam byt nemoze)
-                poleHier = hry.Split(';');
-
+            {               
                 foreach (string item in poleHier)
                 {
                     if (item == game.Name)
@@ -206,19 +217,63 @@ namespace Staem.Forms
             }
         }
 
+        //nechytat
         private void kupit_Click(Game game)
         {
+            float balance;
+            string temp = "";
+
+            Database.dbConnect();
+            MySqlCommand sql = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlDataReader reader = sql.ExecuteReader();
+
+            while (reader.Read())
+            {
+                temp = reader["balance"].ToString();
+            }
+
+            Database.dbClose();
+
+            balance = float.Parse(temp);
+            
+            if(game.Price != "Zadarmo")
+            {
+                if (balance < float.Parse(game.Price))
+                {
+                    MessageBox.Show("Máš málo peňazí");
+                    return;
+                }
+            }
+                
+
             //vdaka tomuto pridavam do databazy hry
             hry += $"{game.Name};";
 
+            if(game.Price != "Zadarmo")
+            {
+                balance -= float.Parse(game.Price);
+            }
+            
+            temp = balance.ToString("#.##");
+
             Database.dbConnect();
-            MySqlCommand cmd1 = new MySqlCommand($"UPDATE Users SET hry = '{hry}' WHERE email = '{user.Email}';", Database.connection);
+            MySqlCommand cmd1 = new MySqlCommand($"UPDATE Users SET hry = '{hry}', balance = {temp} WHERE email = '{user.Email}';", Database.connection);
             cmd1.ExecuteNonQuery();
+            Database.dbClose();
+
+            Database.dbConnect();
+            MySqlCommand cmd2 = new MySqlCommand($"SELECT hry FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlDataReader reader2 = cmd2.ExecuteReader();
+
+            while(reader2.Read())
+            {
+                poleHier = reader2["hry"].ToString().Split(';').ToList();
+            }
+
             Database.dbClose();
 
 
             //toto kontroluje ci je hra zakupena (mohlo to byt aj vo funkcii ale vzhladom na error ktory neviem pochopit to tam byt nemoze)
-            poleHier = hry.Split(';');
 
             if (poleHier != null)
             {

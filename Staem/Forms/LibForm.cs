@@ -18,6 +18,8 @@ namespace Staem.Forms
         User user;
         //List<Game> hry = StoreForm.games; -------------- podla mna to tu netreba
 
+        
+
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
 
@@ -119,7 +121,8 @@ namespace Staem.Forms
                     AutoSize = true,
                     ForeColor = Color.White,
                     Text = item,
-                    Font = new Font(font.Families[0], 14, FontStyle.Bold)
+                    Font = new Font(font.Families[0], 14, FontStyle.Bold),
+                    Name = "nazov"
                 };
 
                 Label labelKategoria = new Label
@@ -130,21 +133,56 @@ namespace Staem.Forms
                     Text = kategoria,
                     Font = new Font(font.Families[0], 11, FontStyle.Italic)
                 };
+                Label odobrat = new Label
+                {
+                    Location = new Point(735, 20),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Odobrať",
+                    Font = new Font(font.Families[0], 11, FontStyle.Regular),
+                    Cursor = Cursors.Hand
+                };
 
 
                 y += 125;
 
-                               
 
+                hra.Controls.Add(odobrat);
                 hra.Controls.Add(obrazok);
                 hra.Controls.Add(nazov);
                 hra.Controls.Add(labelKategoria);
+
+                odobrat.Click += (sender3, e) => libOdobrat_Click(item);
 
                 Controls.Add(hra);
             }
 
             Controls.Add(nadpis);
 
+        }
+
+        private void libOdobrat_Click(string hra)
+        {
+            Database.dbConnect();
+
+            //tento command odobera z databazy hry
+            MySqlCommand cmd = new MySqlCommand($"UPDATE Users SET hry = REPLACE(hry, '{hra};', '') WHERE email = '{user.Email}';", Database.connection);
+            cmd.ExecuteNonQuery();
+
+            Database.dbClose();
+
+            foreach(Panel item in this.Controls.OfType<Panel>())
+            {
+                if (item.Controls["nazov"].Text == hra)
+                {
+                    foreach(Control c in item.Controls)
+                    {
+                        c.Dispose();
+                    }
+
+                    item.Dispose();
+                }
+            }
         }
 
     }
