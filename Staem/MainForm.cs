@@ -27,23 +27,6 @@ namespace Staem
         AddFunds peniazky;
         GameForm gameForm;
 
-        // objekty pre popis a kupu hry
-        /*
-        Label nazovHry, popis, vyvojar;
-        Panel hlavnyPanel;
-        
-        TransparentButton back, next;
-
-        // objekty pre kniznicu
-        
-        Label kniznica, libNazov, libKategoria, libOdobrat, nemasHru, libHrat;
-        PictureBox libObrazok;
-        Panel libHra;
-
-        // kontrola na ktorej stranke sme
-        
-        bool vKniznici = false;*/
-
         List<Control> libHry = new List<Control>();
 
         PrivateFontCollection font = new PrivateFontCollection();

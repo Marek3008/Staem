@@ -16,9 +16,7 @@ namespace Staem.Forms
     public partial class LibForm : Form
     {
         User user;
-        //List<Game> hry = StoreForm.games; -------------- podla mna to tu netreba
-
-        
+        Label nemasHru;
 
         //vytvaram kolekciu mojich vlastnych fontov
         PrivateFontCollection font = new PrivateFontCollection();
@@ -68,7 +66,7 @@ namespace Staem.Forms
 
             if (vlastneneHry.Count == 0)
             {
-                Label nemasHru = new Label
+                nemasHru = new Label
                 {
                     Location = new Point(310, 100),
                     AutoSize = true,
@@ -79,6 +77,9 @@ namespace Staem.Forms
 
                 Controls.Add(nemasHru);
             }
+
+
+            Controls.Add(nadpis);
 
             int y = 0;
 
@@ -157,7 +158,7 @@ namespace Staem.Forms
                 Controls.Add(hra);
             }
 
-            Controls.Add(nadpis);
+            
 
         }
 
@@ -212,12 +213,13 @@ namespace Staem.Forms
                 Database.dbClose();
             }
 
+            /*
             this.Controls.Clear();
             InitializeComponent();
             this.AutoScaleMode = AutoScaleMode.None;
-            drawGames();
+            drawGames();*/
             
-            /*
+            
             foreach (Panel item in this.Controls.OfType<Panel>())
             {
                 if (item.Controls["nazov"].Text == hra)
@@ -231,15 +233,30 @@ namespace Staem.Forms
 
                     item.Dispose();
 
-                    for (int i = index + 1; i < Controls.Count; i++)
+                    for (int i = index; i < Controls.Count; i++)
                     {
                         int y = Controls[i].Top;
 
-                        Controls[i].Location = new Point(360, y + 500);
+                        Controls[i].Location = new Point(360, y - 125);
                     }
 
                 }
-            }*/
+            }
+
+            if(Controls.Count == 1)
+            {
+                nemasHru = new Label
+                {
+                    Location = new Point(310, 100),
+                    AutoSize = true,
+                    ForeColor = Color.White,
+                    Text = "Momentálne nemáš žiadnu hru",
+                    Font = new Font(font.Families[0], 15, FontStyle.Italic)
+                };
+
+                Controls.Add(nemasHru);
+            }
+
         }
 
     }
