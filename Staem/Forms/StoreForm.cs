@@ -65,7 +65,7 @@ namespace Staem.Forms
             Database.dbConnect();
 
             //tento command zoradi vsetky hry podla IDcka od najemnsieho po najvacsie
-            MySqlCommand cmd = new MySqlCommand($"SELECT COUNT(*) FROM Games", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT COUNT(*) FROM games", Database.connection);
 
             cmd.CommandType = System.Data.CommandType.Text;
 
@@ -90,7 +90,7 @@ namespace Staem.Forms
 
                 //tento command vyselectuje zakazdym iba jednu hru ktorej IDcko sa zhoduje s poradim iteracie
                 //tymto sposobom postupne vyselectujeme kazdu hru zvlast
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM Games WHERE ID = {i}", Database.connection);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM games WHERE ID = {i}", Database.connection);
 
                 cmd.CommandType = CommandType.Text;
 
@@ -161,7 +161,7 @@ namespace Staem.Forms
                 }
                 else
                 {
-                    cena.Text = item.Price + '€';
+                    cena.Text = item.Price + " €";
                 }
 
 

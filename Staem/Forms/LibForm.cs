@@ -42,7 +42,7 @@ namespace Staem.Forms
         {
             List<string> vlastneneHry = new List<string>();
 
-            MySqlCommand cmd = new MySqlCommand($"SELECT hry FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT hry FROM users WHERE email='{user.Email}';", Database.connection);
 
             Database.dbConnect();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -87,7 +87,7 @@ namespace Staem.Forms
                 string kategoria = null, cesta = null;
 
 
-                MySqlCommand cmd2 = new MySqlCommand($"SELECT kategoria, cesta FROM Games WHERE nazov='{item}';", Database.connection);
+                MySqlCommand cmd2 = new MySqlCommand($"SELECT kategoria, cesta FROM games WHERE nazov='{item}';", Database.connection);
 
                 Database.dbConnect();
                 MySqlDataReader reader2 = cmd2.ExecuteReader();
@@ -161,28 +161,85 @@ namespace Staem.Forms
 
         }
 
-        private void libOdobrat_Click(string hra)
+        public void libOdobrat_Click(string hra)
         {
+            string cena = "", balance = "";
+            float temp, temp1;
+
             Database.dbConnect();
 
             //tento command odobera z databazy hry
-            MySqlCommand cmd = new MySqlCommand($"UPDATE Users SET hry = REPLACE(hry, '{hra};', '') WHERE email = '{user.Email}';", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"UPDATE users SET hry = REPLACE(hry, '{hra};', '') WHERE email = '{user.Email}';", Database.connection);
             cmd.ExecuteNonQuery();
 
             Database.dbClose();
 
-            foreach(Panel item in this.Controls.OfType<Panel>())
+            Database.dbConnect();
+            MySqlCommand cmd2 = new MySqlCommand($"SELECT cena FROM games WHERE nazov='{hra}';", Database.connection);
+            MySqlDataReader reader2 = cmd2.ExecuteReader();
+
+            while (reader2.Read())
+            {
+                cena = reader2["cena"].ToString();
+            }
+            Database.dbClose();
+
+            Database.dbConnect();
+            MySqlCommand cmdn = new MySqlCommand($"SELECT balance FROM users WHERE email = '{user.Email}';", Database.connection);
+            MySqlDataReader readern = cmdn.ExecuteReader();
+
+            while (readern.Read())
+            {
+                balance = readern["balance"].ToString();
+            }
+            Database.dbClose();
+
+            temp1 = float.Parse(balance);
+
+            if (cena != "Zadarmo")
+            {
+                temp = float.Parse(cena);
+
+                temp1 += temp;
+
+                cena = temp1.ToString("#.##");
+
+                Database.dbConnect();
+
+                MySqlCommand cmd3 = new MySqlCommand($"UPDATE users SET balance = {cena}  WHERE email = '{user.Email}';", Database.connection);
+                cmd3.ExecuteNonQuery();
+
+                Database.dbClose();
+            }
+
+            this.Controls.Clear();
+            InitializeComponent();
+            this.AutoScaleMode = AutoScaleMode.None;
+            drawGames();
+            
+            /*
+            foreach (Panel item in this.Controls.OfType<Panel>())
             {
                 if (item.Controls["nazov"].Text == hra)
                 {
-                    foreach(Control c in item.Controls)
+                    foreach (Control c in item.Controls)
                     {
                         c.Dispose();
                     }
 
+                    int index = Controls.IndexOf(item);
+
                     item.Dispose();
+
+                    for (int i = index + 1; i < Controls.Count; i++)
+                    {
+                        int y = Controls[i].Top;
+
+                        Controls[i].Location = new Point(360, y + 500);
+                    }
+
                 }
-            }
+            }*/
         }
 
     }

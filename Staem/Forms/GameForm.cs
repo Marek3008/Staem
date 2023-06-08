@@ -52,7 +52,7 @@ namespace Staem.Forms
             // nacita nahladove obrazky do listu (ked som to skusal v metode tak pisalo chybu ArgumentOutOfRangeException, ale neviem preco)
             List<string> nahladoveObrazky = new List<string>();
             Database.dbConnect();
-            MySqlCommand cmd = new MySqlCommand($"SELECT nahladObrazok FROM Games WHERE nazov = '{game.Name}'", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT nahladObrazok FROM games WHERE nazov = '{game.Name}'", Database.connection);
 
             MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -74,8 +74,9 @@ namespace Staem.Forms
                 Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2) - (840 / 2) + 200, 100),
                 AutoSize = true,
                 MaximumSize = new Size(840, 0),
-                BackColor = Color.FromArgb(103, 103, 178),
-                Cursor = Cursors.Default
+                BackColor = Color.FromArgb(38, 62, 85),
+                Cursor = Cursors.Default,
+                Padding = new Padding(0,0,0,20)
             };
 
             Label nazovHry = new Label
@@ -89,11 +90,20 @@ namespace Staem.Forms
 
             Label vyvojar = new Label
             {
-                Location = new Point(100, 120),
+                Location = new Point(100, 410),
                 AutoSize = true,
                 ForeColor = Color.White,
                 Text = game.Developer,
                 Font = new Font(font.Families[0], 15, FontStyle.Italic)
+            };
+
+            Label hraKategoria = new Label
+            {
+                Location = new Point(100, 450),
+                AutoSize = true,
+                ForeColor = Color.White,
+                Text = game.Category,
+                Font = new Font(font.Families[0], 15, FontStyle.Regular)
             };
 
             nahladHry = new PictureBox
@@ -125,7 +135,7 @@ namespace Staem.Forms
                 Location = new Point(20, 20),
                 AutoSize = true,
                 MaximumSize = new Size(800, 0),
-                ForeColor = Color.White,
+                ForeColor = Color.Aqua,
                 Text = game.Description,
                 Font = new Font(font.Families[0], 13, FontStyle.Regular)
             };
@@ -136,13 +146,18 @@ namespace Staem.Forms
             kupit = new Button
             {
                 AutoSize = true,
-                Location = new Point(700, labelSize.Height + 30),
+                Location = new Point(600 - 25, 488),
+                ForeColor = Color.Aqua,
                 Text = game.Price,
-                ForeColor = Color.White,
                 Cursor = Cursors.Hand,
                 Font = new Font(font.Families[0], 13, FontStyle.Regular),
-                BackColor = Color.Black,
+                BackColor = Color.FromArgb(38, 62, 85),
             };
+
+            if (game.Price != "Zadarmo")
+            {
+                kupit.Text = $"{game.Price} €";
+            }
 
             //divoky zapis na passnutie argumentu do event handleru
             kupit.Click += (sender, e) => kupit_Click(game);
@@ -156,14 +171,15 @@ namespace Staem.Forms
             nahladHry.Controls.Add(back);
             back.Click += (sender, e) => back_Click(nahladoveObrazky);
 
-            hlavnyPanel.Controls.Add(kupit);
             hlavnyPanel.Controls.Add(popis);
 
+            Controls.Add(kupit);
+            Controls.Add(hraKategoria);
             Controls.Add(nahladHry);
             Controls.Add(hlavnyPanel);
 
             
-            MySqlCommand cmd1 = new MySqlCommand($"SELECT hry FROM Users WHERE email = '{user.Email}';", Database.connection);
+            MySqlCommand cmd1 = new MySqlCommand($"SELECT hry FROM users WHERE email = '{user.Email}';", Database.connection);
             Database.dbConnect();
             MySqlDataReader reader1 = cmd1.ExecuteReader();
 
@@ -184,6 +200,7 @@ namespace Staem.Forms
                     if (item == game.Name)
                     {
                         kupit.Enabled = false;
+                        kupit.Text = "Zakúpené";
                     }
                 }
             }
@@ -224,7 +241,7 @@ namespace Staem.Forms
             string temp = "";
 
             Database.dbConnect();
-            MySqlCommand sql = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlCommand sql = new MySqlCommand($"SELECT balance FROM users WHERE email='{user.Email}';", Database.connection);
             MySqlDataReader reader = sql.ExecuteReader();
 
             while (reader.Read())
@@ -257,12 +274,12 @@ namespace Staem.Forms
             temp = balance.ToString("#.##");
 
             Database.dbConnect();
-            MySqlCommand cmd1 = new MySqlCommand($"UPDATE Users SET hry = '{hry}', balance = {temp} WHERE email = '{user.Email}';", Database.connection);
+            MySqlCommand cmd1 = new MySqlCommand($"UPDATE users SET hry = '{hry}', balance = {temp} WHERE email = '{user.Email}';", Database.connection);
             cmd1.ExecuteNonQuery();
             Database.dbClose();
 
             Database.dbConnect();
-            MySqlCommand cmd2 = new MySqlCommand($"SELECT hry FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlCommand cmd2 = new MySqlCommand($"SELECT hry FROM users WHERE email='{user.Email}';", Database.connection);
             MySqlDataReader reader2 = cmd2.ExecuteReader();
 
             while(reader2.Read())
@@ -282,6 +299,7 @@ namespace Staem.Forms
                     if (item == game.Name)
                     {
                         kupit.Enabled = false;
+                        kupit.Text = "Zakúpené";
                     }
                 }
             }

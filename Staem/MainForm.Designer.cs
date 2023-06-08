@@ -86,7 +86,7 @@ namespace Staem
             // labelNick
             // 
             this.labelNick.AutoSize = true;
-            this.labelNick.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.labelNick.Cursor = System.Windows.Forms.Cursors.Default;
             this.labelNick.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNick.ForeColor = System.Drawing.Color.White;
             this.labelNick.Location = new System.Drawing.Point(1625, 12);
@@ -94,11 +94,10 @@ namespace Staem
             this.labelNick.Size = new System.Drawing.Size(72, 25);
             this.labelNick.TabIndex = 3;
             this.labelNick.Text = "Marek";
-            this.labelNick.MouseLeave += new System.EventHandler(this.labelPanel_unhover);
-            this.labelNick.MouseHover += new System.EventHandler(this.labelPanel_hover);
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(1818, 3);
             this.pictureBox1.Name = "pictureBox1";

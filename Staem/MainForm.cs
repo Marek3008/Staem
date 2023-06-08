@@ -27,8 +27,6 @@ namespace Staem
         AddFunds peniazky;
         GameForm gameForm;
 
-        bool vLib = false, vGame = false, vStore = true, vPeniazky = false;
-
         // objekty pre popis a kupu hry
         /*
         Label nazovHry, popis, vyvojar;
@@ -107,7 +105,7 @@ namespace Staem
         public void peniazeLoad()
         {
             string temp = "";
-            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM users WHERE email='{user.Email}';", Database.connection);
 
             Database.dbConnect();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -233,7 +231,7 @@ namespace Staem
             };
 
             Controls.Add(libForm);
-            
+
             //nechytat sa
             if (this.Controls.Count > 8)
             {

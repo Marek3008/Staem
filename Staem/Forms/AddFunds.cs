@@ -87,7 +87,7 @@ namespace Staem.Forms
             float num;
             string temp = "";
 
-            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM Users WHERE email='{user.Email}';", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT balance FROM users WHERE email='{user.Email}';", Database.connection);
 
             Database.dbConnect();
             MySqlDataReader reader = cmd.ExecuteReader();
@@ -104,7 +104,7 @@ namespace Staem.Forms
 
 
             Database.dbConnect();
-            MySqlCommand cmd2 = new MySqlCommand($"UPDATE Users SET balance = {num} WHERE email='{user.Email}'", Database.connection);
+            MySqlCommand cmd2 = new MySqlCommand($"UPDATE users SET balance = {num} WHERE email='{user.Email}'", Database.connection);
             cmd2.ExecuteNonQuery();
 
             Database.dbClose();

@@ -72,7 +72,7 @@ namespace Staem
         public void loginUser()
         {
             //vdaka tomuto commandu 
-            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM Users WHERE email = '{this.Email}' AND userID = '{this.UserID}' AND pass = '{this.Password}'", Database.connection);
+            MySqlCommand cmd = new MySqlCommand($"SELECT * FROM users WHERE email = '{this.Email}' AND userID = '{this.UserID}' AND pass = '{this.Password}'", Database.connection);
             cmd.CommandType = CommandType.Text;
             MySqlDataReader reader = cmd.ExecuteReader();
 
