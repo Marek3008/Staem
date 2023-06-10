@@ -338,10 +338,18 @@ namespace Staem.Forms
                         Padding = new Padding(2),
                         BackColor = Color.FromArgb(38, 62, 85),
                         ForeColor = Color.White,
-                        Text = item.Price,
                         Font = new Font(font.Families[0], 10, FontStyle.Regular), // moze byt aj FontStyle.Bold
                         Cursor = Cursors.Hand
                     };
+
+                    if (item.Price == "Zadarmo")
+                    {
+                        cena.Text = "Zadarmo";
+                    }
+                    else
+                    {
+                        cena.Text = item.Price + " €";
+                    }
 
 
                     //vdaka tomuto divokemu zapisu mozem do onclick metody passnut argument
